@@ -9,15 +9,15 @@
 return array(
     'redis' => array(
         'host' => '127.0.0.1',
-        'port' => '',
+        'port' => 6379,
         'username' => 'admin',
         'passwd' => 'admin'
     ),
     'mongo' => array(
         '' => '',
     ),
-    'wechat' => array(
+    'wexin' => array(
         'appId' => '',
-        '' => '',
+        'appsecret' => '',
     ),
 );

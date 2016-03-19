@@ -8,14 +8,13 @@
  */
 
 //获得控制器和方法
-
 $c_str = $_GET['c'] ? $_GET['c'] : 'index';
 $a_str = $_GET['a'] ? $_GET['a'] : 'index';
 
-//组装控制器名和方法名
+//拼装控制器名和方法名
 $c_name = $c_str.'Controller';
 $a_name = 'action'.ucfirst($a_str);
-$path = './Controllers/'.$c_name.'.php';
+$path = $_SERVER['DOCUMENT_ROOT'].'/Controllers/'.$c_name.'.php';
 
 //判断合法性
 if(!include_once $path){
@@ -31,7 +30,7 @@ if(!include_once $path){
 
 //默认控制器和方法
 function defaultIndex(){
-    include_once './Controllers/indexController.php';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
     $con = new indexController;
     $con->actionIndex();
 }
