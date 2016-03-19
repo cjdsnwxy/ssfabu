@@ -30,7 +30,7 @@ if(!include_once $path){
 
 //默认控制器和方法
 function defaultIndex(){
-    include_once $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
     $con = new indexController;
     $con->actionIndex();
 }

@@ -18,7 +18,7 @@ class controller
     }
 
     protected function redis(){
-        require_once $_SERVER['DOCUMENT_ROOT'].'/Base/redis.php';
+        require $_SERVER['DOCUMENT_ROOT'].'/Base/redis.php';
         $redis = new Redis;
         $this->redis = $redis;
     }
