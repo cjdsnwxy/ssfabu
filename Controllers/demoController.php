@@ -10,5 +10,6 @@ class demoController extends controller
     echo "this is demoControllser actionDemo!<br>";
     $model = $this->M('Demo');
     $res = $model->demo();
+    echo $res;
   }
 }

@@ -8,15 +8,24 @@
 include_once 'base.php';
 class redisClass extends base
 {
-    private $con;
+    private $redis;
 
     function __construct(){
         $conf = include 'conf.php';
         $redis = new Redis();
-        $this->con = $redis->connect($conf['redis']['host'],$conf['redis']['port']);
+        $redis->connect($conf['redis']['host'],$conf['redis']['port']);
+        $this->redis = $redis;
     }
 
     public function demo(){
-        echo 'redis';
+        ;
+    }
+
+    public function set($key,$value){
+        $this->redis->set($key,$value);
+    }
+
+    public function get($key){
+        return $this->redis->get($key);
     }
 }

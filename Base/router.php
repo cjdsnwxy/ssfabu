@@ -7,8 +7,7 @@
  * 路由控制函数
  */
 
-ini_set("display_errors", "On");
-error_reporting(E_ALL | E_STRICT);
+
 
 //获得控制器和方法
 
