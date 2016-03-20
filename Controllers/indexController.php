@@ -6,11 +6,15 @@
  * Time: 下午12:49
  */
 
-require_once 'controller.php';
+include $_SERVER['DOCUMENT_ROOT'].'/Controllers/controller.php';
 
 class indexController extends controller
 {
     public function actionIndex(){
         echo "Hello MVC";
+    }
+
+    public function actionD(){
+        echo "ddd";
     }
 }

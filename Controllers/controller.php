@@ -8,19 +8,28 @@
 
 class controller
 {
-    protected $app;
+    public $app;
 
-    protected $redis;
+    public $redis;
 
-    //前端展示函数
-    protected function show(){
+    public $model;
+
+    //访问View层函数
+    public function show($path,$param){
 
     }
 
+    //调用redis缓存函数
     protected function redis(){
-        require $_SERVER['DOCUMENT_ROOT'].'/Base/redis.php';
+        require_once $_SERVER['DOCUMENT_ROOT'].'/Base/redis.php';
         $redis = new Redis;
         $this->redis = $redis;
     }
 
+    //访问model层函数
+    public function M($model){
+        $path = $_SERVER['DOCUMENT_ROOT'].'/Models/'.$model.'.php';
+        include $path;
+        return new $model;
+    }
 }
