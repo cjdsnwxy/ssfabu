@@ -3,7 +3,12 @@ ini_set("display_errors", "On");
 error_reporting(E_ALL | E_STRICT);
 
 
-include "./Base/redis.php";
-$redis = new redisClass();
-$redis->set('aa','aaa');
-echo $redis->get('aa');
+$m = new MongoClient("mongodb://admin:admin@localhost:27017");
+$db = $m->test;
+$collection = $db->test1;
+$array = array('name'=>'melon','age'=>'24','sex'=>'Male','birth'=>array('year'=>'1988','month'=>'07','day'=>'13'));
+$collection->insert($array);
+$cursor = $collection->find();
+foreach ($cursor as $id => $value) {
+    echo "$id: "; var_dump($value); echo "<br>";
+}

@@ -5,8 +5,7 @@
  * Date: 16-3-19
  * Time: 下午6:00
  */
-include_once 'base.php';
-class redisClass extends base
+class redisClass
 {
     private $redis;
 

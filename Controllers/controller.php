@@ -28,8 +28,7 @@ class controller
 
     //访问model层函数
     public function M($model){
-        $path = $_SERVER['DOCUMENT_ROOT'].'/Models/'.$model.'.php';
-        include $path;
+        include $_SERVER['DOCUMENT_ROOT'].'/Models/'.$model.'.php';
         return new $model;
     }
 }

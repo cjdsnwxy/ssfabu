@@ -14,7 +14,11 @@ return array(
         'passwd' => 'admin'
     ),
     'mongo' => array(
-        '' => '',
+        'host' => 'localhost',
+        'port' => 27017,
+        'username' => 'admin',
+        'passwd' => 'admin',
+        'dbname' => 'test'
     ),
     'wexin' => array(
         'appId' => '',
