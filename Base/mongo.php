@@ -10,16 +10,15 @@ class mongoClass
 
     private $db;
 
-    public $collection;
-
     function __construct()
     {
         $conf = include 'conf.php';
-        $mongo = new MongoClient("mongodb://".$conf['mongo']['username'].":".$conf['mongo']['passwd']."@".$conf['mongo']['host'].":".$conf['mongo']['post']);
+        $mongo = new MongoClient("mongodb://".$conf['mongo']['username'].":".$conf['mongo']['passwd']."@".$conf['mongo']['host'].":".$conf['mongo']['port']);
         $this->db = $mongo->$conf['mongo']['dbname'];
     }
 
-    public function show(){
-
+    public function showAllByCollection(){
+        $collection = $this->db->test1;
+        return $collection->find();
     }
 }
