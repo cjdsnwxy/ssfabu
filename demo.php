@@ -13,9 +13,6 @@ error_reporting(E_ALL | E_STRICT);
 //    echo "$id: "; var_dump($value); echo "<br>";
 //}
 
-include "./Base/mongo.php";
-$mongo = new mongoClass();
-$cursor = $mongo->showAll('test1');
-foreach ($cursor as $id => $value) {
-    echo "$id: "; var_dump($value); echo "<br>";
-}
+$arr = array('a'=>'aaa','b'=>'bbb','c'=>'ccc');
+extract($arr);
+echo $a.$b.$c;
