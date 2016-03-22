@@ -15,7 +15,7 @@ error_reporting(E_ALL | E_STRICT);
 
 include "./Base/mongo.php";
 $mongo = new mongoClass();
-$cursor = $mongo->showAllByCollection('test1');
+$cursor = $mongo->showAll('test1');
 foreach ($cursor as $id => $value) {
     echo "$id: "; var_dump($value); echo "<br>";
 }

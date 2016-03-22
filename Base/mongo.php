@@ -17,7 +17,7 @@ class mongoClass
         $this->db = $mongo->$conf['mongo']['dbname'];
     }
 
-    public function showAllByCollection($collectionName){
+    public function showAll($collectionName){
         $collection = $this->db->$collectionName;
         return $collection->find();
     }

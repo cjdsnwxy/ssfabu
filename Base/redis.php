@@ -16,10 +16,6 @@ class redisClass
         $this->redis = $redis;
     }
 
-    public function demo(){
-        ;
-    }
-
     public function set($key,$value){
         $this->redis->set($key,$value);
     }
