@@ -11,14 +11,10 @@ include $_SERVER['DOCUMENT_ROOT'].'/Controllers/controller.php';
 class indexController extends controller
 {
     public function actionIndex(){
-        $user = $this->M('User');
-        $username = $user->getUserName();
+        $userInfo = $this->M('User');
+        $user = $userInfo->getUserInfo('111111');
         $this->display('Index/index',array(
-            'username' => $username,
+            'user' => $user,
         ));
-    }
-
-    public function actionD(){
-        echo "ddd";
     }
 }

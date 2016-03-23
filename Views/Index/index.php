@@ -26,7 +26,10 @@
     <![endif]-->
   </head>
   <body>
-    <h1>你好，<?php echo $username ?>！</h1>
+    <h1>你好，你的username=<?php echo $user['username'] ?>！</h1>
+    <h1>你好，你的openId=<?php echo $user['openId'] ?>！</h1>
+    <h1>你好，你的phone=<?php echo $user['phone'] ?>！</h1>
+    <h1>你好，你的headimage=<?php echo $user['headimage'] ?>！</h1>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -18,7 +18,7 @@ return array(
         'port' => 27017,
         'username' => 'admin',
         'passwd' => 'admin',
-        'dbname' => 'test'
+        'dbname' => 'ssfabu'
     ),
     'wexin' => array(
         'appId' => '',

@@ -8,17 +8,12 @@
 class mongoClass
 {
 
-    private $db;
+    public $mongo;
 
     function __construct()
     {
         $conf = include 'conf.php';
-        $mongo = new MongoClient("mongodb://".$conf['mongo']['username'].":".$conf['mongo']['passwd']."@".$conf['mongo']['host'].":".$conf['mongo']['port']);
-        $this->db = $mongo->$conf['mongo']['dbname'];
-    }
-
-    public function showAll($collectionName){
-        $collection = $this->db->$collectionName;
-        return $collection->find();
+        $mongodb = new MongoClient("mongodb://".$conf['mongo']['username'].":".$conf['mongo']['passwd']."@".$conf['mongo']['host'].":".$conf['mongo']['port']);
+        $this->mongo = $mongodb->$conf['mongo']['dbname'];
     }
 }

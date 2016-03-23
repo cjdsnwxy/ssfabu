@@ -7,7 +7,10 @@
  */
 class model
 {
+    public $model;
+
     function __construct(){
-        include $_SERVER['DOCUMENT_ROOT'].'/Base/mongo.php';
+
+        $this->model = new mongoClass();
     }
 }
