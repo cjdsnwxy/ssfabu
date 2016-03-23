@@ -10,20 +10,18 @@ class controller
 {
     public $app;
 
-    public $redis;
-
     public $model;
 
     //访问View层函数
-    public function show($path,$param){
-
+    public function display($path,$param){
+        include $_SERVER['DOCUMENT_ROOT'].'/Views/'.$path.'.php';
+        extract($param);
     }
 
     //调用redis缓存函数
     protected function redis(){
-        require_once $_SERVER['DOCUMENT_ROOT'].'/Base/redis.php';
-        $redis = new Redis;
-        $this->redis = $redis;
+        include $_SERVER['DOCUMENT_ROOT'].'/Base/redis.php';
+        return new Redis;
     }
 
     //访问model层函数

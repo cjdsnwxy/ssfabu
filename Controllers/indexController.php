@@ -11,7 +11,10 @@ include $_SERVER['DOCUMENT_ROOT'].'/Controllers/controller.php';
 class indexController extends controller
 {
     public function actionIndex(){
-        echo "Hello MVC";
+        $this->display('Index/index',array(
+            'a' => 'this is a',
+            'b' => 'this is b'
+        ));
     }
 
     public function actionD(){
