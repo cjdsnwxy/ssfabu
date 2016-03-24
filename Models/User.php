@@ -8,10 +8,24 @@
 include $_SERVER['DOCUMENT_ROOT'].'/Base/mongo.php';
 class User
 {
-    public function getUserInfo($openId){
-        $model = new mongoClass();
-        $collection = $model->mongo->user;
-        return $collection->findOne(array('openId' => $openId));
+    private  $collection;
 
+    function __construct(){
+        $model = new mongoClass();
+        $this->collection = $model->mongo->user;
     }
+
+    public function getUserInfo($openId){
+        return $this->collection->findOne(array('openId' => $openId));
+    }
+    public function getUserName($openId){
+        return $this->collection->findOne(array('openId' => $openId),array('username'));
+    }
+    public function getJoinGroup($openId){
+        return $this->collection->findOne(array('openId' => $openId),array('joinGroup'));
+    }
+    public function getCreateGroup($openId){
+        return $this->collection->findOne(array('openId' => $openId),array('CreateGroup'));
+    }
+
 }
