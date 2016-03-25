@@ -15,7 +15,6 @@ class indexController extends controller
         $user = $userInfo->getUserInfo('111111');
         $createGroup = $userInfo->getCreateGroup('111111');
         $joinGroup = $userInfo->getJoinGroup('111111');
-        var_dump($createGroup);die;
         $this->display('Index/index',array(
             'user' => $user,
             'createGroup' => $createGroup,
