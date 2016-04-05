@@ -30,7 +30,8 @@
     <h1>你好，你的openId=<?php echo $user['openId'] ?>！</h1>
     <h1>你好，你的phone=<?php echo $user['phone'] ?>！</h1>
     <h1>你好，你的headimage=<?php echo $user['headimage'] ?>！</h1>
-    <h1>你好，你加入的群组有“<?php echo $user['createGroup'] ?>！</h1>
+    <h1>你好，你加入的群组有“<?php echo $user['joinGroup'] ?>！</h1>
+    <h1>你好，你创建的群组有“<?php echo $user['createGroup'] ?>！</h1>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

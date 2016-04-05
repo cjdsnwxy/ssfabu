@@ -7,14 +7,12 @@
  * 路由控制函数
  */
 
-
-
-//获得控制器和方法
+//获得Url的控制器和方法
 
 $c_str = isset($_GET['c']) ? $_GET['c'] : 'index';
 $a_str = isset($_GET['a']) ? $_GET['a'] : 'index';
 
-//拼装控制器名和方法名
+//拼接控制器名和方法名
 $c_name = $c_str.'Controller';
 $a_name = 'action'.ucfirst($a_str);
 $path = $_SERVER['DOCUMENT_ROOT'].'/Controllers/'.$c_name.'.php';
