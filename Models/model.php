@@ -7,10 +7,14 @@
  */
 class model
 {
-    public $model;
+    private $mongo;
+
+    public $collection;
 
     function __construct(){
-
-        $this->model = new mongoClass();
+        include $_SERVER['DOCUMENT_ROOT'].'/Base/mongo.php';
+        $mongoClass = new mongoClass();
+        $Class = lcfirst(get_class($this));
+        $this->collection = $mongoClass->mongo->$Class;
     }
 }

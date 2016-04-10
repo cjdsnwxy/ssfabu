@@ -10,15 +10,20 @@ include $_SERVER['DOCUMENT_ROOT'].'/Controllers/controller.php';
 
 class indexController extends controller
 {
+
     public function actionIndex(){
-        $userInfo = $this->M('User');
-        $user = $userInfo->getUserInfo('111111');
-        $createGroup = $userInfo->getCreateGroup('111111');
-        $joinGroup = $userInfo->getJoinGroup('111111');
+        $user = $this->M('User');
+        $userInfo = $user->getUserInfo($this->openId);
         $this->display('Index/index',array(
-            'user' => $user,
-            'createGroup' => $createGroup,
-            'joinGroup' => $joinGroup
+            'user' => $userInfo
         ));
+    }
+
+    public function actionCreateGroup(){
+        $user = $this->M('User');
+    }
+
+    public function actionJoinGroup(){
+
     }
 }

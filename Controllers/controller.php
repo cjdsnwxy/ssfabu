@@ -8,13 +8,20 @@
 
 class controller
 {
+
+    public $openId;
+
     public $app;
 
     public $model;
 
+    function __construct(){
+        $this->openId = '111111';
+    }
+
     //访问View层函数
     public function display($path,$param){
-        extract($param);
+        extract($param);//分解变量
         ob_end_clean (); //关闭顶层的输出缓冲区内容
         ob_start ();     // 开始一个新的缓冲区
         include $_SERVER['DOCUMENT_ROOT'].'/Views/'.$path.'.php';
