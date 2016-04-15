@@ -8,12 +8,6 @@
 include $_SERVER['DOCUMENT_ROOT'].'/Models/Model.php';
 class User extends Model
 {
-    private $username;
-    private $phone;
-    private $headimage;
-    private $createGroup;
-    private $joinGroup;
-
     public function getUserInfo($openId){
         return $this->collection->findOne(array('openId' => $openId));
     }
@@ -31,12 +25,10 @@ class User extends Model
     }
 
     public function JoinGroup($openId,$groupId){
+
     }
 
     public function CreateGroup($openId,$groupId){
-        $array = array(
 
-        );
-        $this->collection->insert($array);
     }
 }
