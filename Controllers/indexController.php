@@ -6,24 +6,23 @@
  * Time: 下午12:49
  */
 
-include $_SERVER['DOCUMENT_ROOT'].'/Controllers/controller.php';
+include $_SERVER['DOCUMENT_ROOT'].'/Controllers/Controller.php';
 
-class indexController extends controller
+class indexController extends Controller
 {
 
     public function actionIndex(){
-        $user = $this->M('User');
-        $userInfo = $user->getUserInfo($this->openId);
-        $this->display('Index/index',array(
-            'user' => $userInfo
-        ));
+        $this->display('Index/index');
     }
 
     public function actionCreateGroup(){
+        $group = $this->M('Group');
+        $newGroup = $group->creatGroup($this->openId);
         $user = $this->M('User');
     }
 
-    public function actionJoinGroup(){
-
+    public function actionJoinGroup($groupId){
+        $group = $this->M('Group');
+        $group->joinGroup($this->openId,$groupId);
     }
 }

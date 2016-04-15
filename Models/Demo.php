@@ -5,7 +5,7 @@
  * Date: 16-3-20
  * Time: 下午4:06
  */
-include 'model.php';
+include 'Model.php';
 class Demo extends model
 {
 

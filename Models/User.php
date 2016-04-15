@@ -5,8 +5,8 @@
  * Date: 16-3-23
  * Time: 下午10:33
  */
-include $_SERVER['DOCUMENT_ROOT'].'/Models/model.php';
-class User extends model
+include $_SERVER['DOCUMENT_ROOT'].'/Models/Model.php';
+class User extends Model
 {
     private $username;
     private $phone;

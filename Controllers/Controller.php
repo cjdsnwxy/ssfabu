@@ -6,7 +6,7 @@
  * Time: 下午12:49
  */
 
-class controller
+class Controller
 {
 
     public $openId;
@@ -20,7 +20,7 @@ class controller
     }
 
     //访问View层函数
-    public function display($path,$param){
+    public function display($path,$param = ''){
         extract($param);//分解变量
         ob_end_clean (); //关闭顶层的输出缓冲区内容
         ob_start ();     // 开始一个新的缓冲区
