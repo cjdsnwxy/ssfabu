@@ -3,6 +3,7 @@ ini_set("display_errors", "On");
 error_reporting(E_ALL | E_STRICT);
 
 //
+echo phpinfo();die;
 //$m = new MongoClient("mongodb://admin:admin@localhost:27017");
 //$db = $m->test;
 //$collection = $db->test1;
