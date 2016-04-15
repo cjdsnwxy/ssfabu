@@ -8,8 +8,6 @@
 include $_SERVER['DOCUMENT_ROOT'].'/Models/model.php';
 class User extends model
 {
-    private $id;
-    private $openId;
     private $username;
     private $phone;
     private $headimage;
