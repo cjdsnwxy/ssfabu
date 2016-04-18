@@ -7,20 +7,10 @@
  */
 class Controller
 {
-
-    public $openId;
-
-    public $app;
-
-    public $model;
+    private $openId;
 
     function __construct(){
         $this->openId = '111111';
-    }
-
-    //访问View层函数
-    public function display($path){
-        include $_SERVER['DOCUMENT_ROOT'].'/Views/'.$path.'.php';
     }
 
     //调用redis缓存函数
@@ -29,9 +19,21 @@ class Controller
         return new Redis;
     }
 
-    //访问model层函数
+    //访问Controller层函数
+    public function C($controller){
+        include $_SERVER['DOCUMENT_ROOT'].'/Controller/'.$controller.'.php';
+        $controller = 'action'.ucfirst($controller);
+        return new $controller;
+    }
+
+    //访问Model层函数
     public function M($model){
         include $_SERVER['DOCUMENT_ROOT'].'/Models/'.$model.'.php';
         return new $model;
+    }
+
+    //访问View层函数
+    public function display($path){
+        include $_SERVER['DOCUMENT_ROOT'].'/Views/'.$path.'.php';
     }
 }
