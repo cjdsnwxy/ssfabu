@@ -18,7 +18,7 @@
 <body>
 <div id="indexPage" class="weui_msg">
   <div class="weui_icon_area">
-    <img src="./Views/Public/img/icon.png">
+    <img style="color:#04BE02" src="./Views/Public/img/icon.png">
   </div>
   <div class="weui_text_area">
     <h1 class="weui_msg_title">神速发布系统</h1>
