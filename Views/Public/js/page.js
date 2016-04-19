@@ -1,0 +1,19 @@
+$(document).ready(function(){
+  $("#joinGroupBtn").click(function(){
+    $("#indexPage").hide();
+    $("#joinGroupPage").show();
+  });
+  $("#myGroupBtn").click(function(){
+    $("#indexPage").hide();
+    $("#myGroupPage").show();
+  });
+  $("#myCreateBtn").click(function(){
+    $("#indexPage").hide();
+    $("#myCreatePage").show();
+  });
+  $("#createGrouoBtn").click(function(){
+    $("#indexPage").hide();
+    $("#createGroupPage").show();
+  });
+  $("#datetime-picker").datetimePicker();
+});

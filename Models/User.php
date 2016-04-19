@@ -8,6 +8,10 @@
 include $_SERVER['DOCUMENT_ROOT'].'/Models/Model.php';
 class User extends Model
 {
+    public function findUser($openId){
+        return $this->collection->findOne(array('openId' => $openId));
+    }
+
     public function getUserInfo($openId){
         return $this->collection->findOne(array('openId' => $openId));
     }

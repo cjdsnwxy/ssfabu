@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * Created by PhpStorm.
  * User: king
@@ -40,7 +40,7 @@ class groupApiController extends Controller
     }
 
     //获取加入的群组列表
-    public function actionList(){
+    public function actionJoinList(){
 
     }
 

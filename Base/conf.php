@@ -8,20 +8,20 @@
 
 return array(
     'redis' => array(
-        'host' => '127.0.0.1',
-        'port' => 6379,
-        'username' => 'admin',
-        'passwd' => 'admin'
-    ),
+            'host' => '127.0.0.1',
+            'port' => 6379,
+            'username' => 'admin',
+            'passwd' => 'admin'
+        ),
     'mongo' => array(
-        'host' => 'localhost',
-        'port' => 27017,
-        'username' => 'admin',
-        'passwd' => 'admin',
-        'dbname' => 'ssfabu'
-    ),
+            'host' => 'localhost',
+            'port' => 27017,
+            'username' => 'admin',
+            'passwd' => 'admin',
+            'dbname' => 'ssfabu'
+        ),
     'wexin' => array(
-        'appId' => '',
-        'appsecret' => '',
-    ),
+            'appId' => '',
+            'appsecret' => '',
+        ),
 );

@@ -7,7 +7,7 @@
  */
 class Controller
 {
-    private $openId;
+    public $openId;
 
     function __construct(){
         $this->openId = '111111';
@@ -16,7 +16,7 @@ class Controller
     //调用redis缓存函数
     protected function redis(){
         include $_SERVER['DOCUMENT_ROOT'].'/Base/redis.php';
-        return new Redis;
+        return new redisClass();
     }
 
     //访问Controller层函数
