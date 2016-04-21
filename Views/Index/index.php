@@ -18,7 +18,7 @@
 <body>
 <div id="indexPage" class="weui_msg">
   <div class="weui_icon_area">
-    <img style="color:#04BE02" src="./Views/Public/img/icon.png">
+    <img src="./Views/Public/img/icon.png">
   </div>
   <div class="weui_text_area">
     <h1 class="weui_msg_title">神速发布系统</h1>
@@ -39,7 +39,7 @@
 <div id="joinGroupPage" style="display: none;">
   <div id="indexPage" class="weui_msg">
     <div class="weui_icon_area">
-      <img style="color:#04BE02" src="./Views/Public/img/icon.png">
+      <img src="./Views/Public/img/icon.png">
     </div>
     <div class="weui_text_area">
       <h1 class="weui_msg_title">神速发布系统</h1>
@@ -73,7 +73,7 @@
 <div id="createGroupPage" style="display: none;">
   <div id="indexPage" class="weui_msg">
     <div class="weui_icon_area">
-      <img style="color:#04BE02" src="./Views/Public/img/icon.png">
+      <img src="./Views/Public/img/icon.png">
     </div>
     <div class="weui_text_area">
       <h1 class="weui_msg_title">神速发布系统</h1>
