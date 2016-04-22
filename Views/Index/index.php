@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="./Views/Public/css/jquery-weui.css">
 </head>
 <body>
-<div id="indexPage" class="weui_msg">
+<div id="indexPage"  class="weui_msg">
   <div class="weui_icon_area">
     <img src="./Views/Public/img/icon.png">
   </div>
@@ -48,18 +48,63 @@
     <div class="weui_cell">
       <div class="weui_cell_hd"><label class="weui_label">群组ID</label></div>
       <div class="weui_cell_bd weui_cell_primary">
-        <input class="weui_input" type="tel" placeholder="请输入群组ID">
+        <input id="joinGroupId" class="weui_input" type="tel" placeholder="请输入群组ID">
       </div>
     </div>
   </div>
   <div class="weui_opr_area">
     <p class="weui_btn_area">
-      <button class="weui_btn weui_btn_primary">确定</button>
+      <button onclick="showGroupInfoPage()" class="weui_btn weui_btn_primary">确定</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>
   <div class="weui_extra_area">
     <a href="">使用帮助</a>
+  </div>
+</div>
+<div id="groupInfoPage" style="display: none;" class="weui_msg">
+  <div class="weui_text_area">
+    <h1 class="weui_msg_title">群组详情</h1>
+  </div>
+  <div class="weui_opr_area">
+    <div class="weui_cells">
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>群组ID</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="groupId">110110110</p>
+        </div>
+      </div>
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>群组名称</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="groupName">我也不知道到底要干什么的群组</p>
+        </div>
+      </div>
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>创建时间</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="createTime">2012-12-25</p>
+        </div>
+      </div>
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>当前人数</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="groupNum">123</p>
+        </div>
+      </div>
+    </div>
+    <p class="weui_btn_area">
+      <button onclick="joinGroup()" class="weui_btn weui_btn_primary">加入</button>
+      <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
+    </p>
   </div>
 </div>
 <div id="myGroupPage" style="display: none;" class="weui_msg">
@@ -89,7 +134,7 @@
     </p>
   </div>
 </div>
-<div id="myCreatePage"style="display: none;" class="weui_msg">
+<div id="myCreatePage" style="display: none;" class="weui_msg">
   <div class="weui_text_area">
     <h1 class="weui_msg_title">神速发布系统</h1>
     <p class="weui_msg_desc">我创建的</p>
@@ -147,26 +192,20 @@
   </div>
 </div>
 <div id="successPage" style="display: none;" class="weui_msg">
-  <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
+  <div class="weui_icon_area"><i class="weui_icon_safe weui_icon_safe_success"></i></div>
   <div class="weui_text_area">
     <h2 class="weui_msg_title">操作成功</h2>
-    <p class="weui_msg_desc">内容详情，可根据实际需要安排</p>
+    <p id="successMeg" class="weui_msg_desc"></p>
   </div>
   <div class="weui_opr_area">
     <p class="weui_btn_area">
-      <a href="" class="weui_btn weui_btn_primary">确定</a>
+      <a href="" class="weui_btn weui_btn_primary">查看详情</a>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>
-  <div class="weui_extra_area">
-    <a href="">查看详情</a>
-  </div>
-</div>
-<div id="successPage" style="display: none;">
-
 </div>
   <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
   <script src="./Views/Public/js/jquery-weui.js"></script>
-  <script src="./Views/Public/js/page.js"></script>
+  <script src="./Views/Public/js/index.js"></script>
 </body>
 </html>
