@@ -102,7 +102,7 @@
       </div>
       <div class="weui_cell">
         <div class="weui_cell_bd">
-          <p>当前人数</p>
+          <p>群组描述</p>
         </div>
         <div class="weui_cell_ft weui_cell_primary" >
           <p align="left" id="groupIntro">Panelweui_panel由head（可选）、body、foot（可选）三部分组成，主要承载了图文组合列表weui_media_appmsg、文字组合列表weui_media_text以及小图文组合列表weui_media_text。</p>
@@ -186,7 +186,7 @@
   <div class="weui_cells weui_cells_form">
     <div class="weui_cell">
       <div class="weui_cell_bd weui_cell_primary">
-        <textarea class="weui_textarea" placeholder="请输入群组描述" rows="3"></textarea>
+        <textarea class="weui_textarea" placeholder="请输入群组描述" rows="3" ></textarea>
       </div>
     </div>
   </div>

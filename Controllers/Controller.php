@@ -36,4 +36,15 @@ class Controller
     public function display($path){
         include $_SERVER['DOCUMENT_ROOT'].'/Views/'.$path.'.php';
     }
+
+    public function renderAjax($obj = null){
+        $json = [
+            'ok' => 0
+        ];
+        if (isset($obj)) {
+            $json['obj'] = $obj;
+        }
+        $json = json_encode($json, JSON_UNESCAPED_UNICODE);
+        echo $json;
+    }
 }
