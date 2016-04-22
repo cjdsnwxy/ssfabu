@@ -54,7 +54,7 @@
   </div>
   <div class="weui_opr_area">
     <p class="weui_btn_area">
-      <button onclick="showGroupInfoPage()" class="weui_btn weui_btn_primary">确定</button>
+      <button onclick="showGroupInfoPageByJoinBtn()" class="weui_btn weui_btn_primary">确定</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>
@@ -100,9 +100,17 @@
           <p id="groupNum">123</p>
         </div>
       </div>
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>当前人数</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p align="left" id="groupIntro">Panelweui_panel由head（可选）、body、foot（可选）三部分组成，主要承载了图文组合列表weui_media_appmsg、文字组合列表weui_media_text以及小图文组合列表weui_media_text。</p>
+        </div>
+      </div>
     </div>
     <p class="weui_btn_area">
-      <button onclick="joinGroup()" class="weui_btn weui_btn_primary">加入</button>
+      <button id="joinBtn" onclick="joinGroup()" class="weui_btn weui_btn_primary">加入</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>
@@ -114,17 +122,15 @@
   </div>
   <div class="weui_opr_area">
     <div class="weui_cells weui_cells_access">
-      <a class="weui_cell" href="javascript:;">
+      <a class="weui_cell" onclick="showGroupInfoPage(this)">
         <div class="weui_cell_bd weui_cell_primary">
-          <p>cell standard</p>
+          <p align="left">传媒中心通知组</p>
         </div>
-        <div class="weui_cell_ft">说明文字</div>
       </a>
-      <a class="weui_cell" href="javascript:;">
+      <a class="weui_cell" onclick="showGroupInfoPage(this)">
         <div class="weui_cell_bd weui_cell_primary">
-          <p>cell standard</p>
+          <p align="left">嵌入式软件12-01通知组</p>
         </div>
-        <div class="weui_cell_ft">说明文字</div>
       </a>
     </div>
   </div>
@@ -141,13 +147,13 @@
   </div>
   <div class="weui_opr_area">
     <div class="weui_cells weui_cells_access">
-      <a class="weui_cell" href="javascript:;">
+      <a class="weui_cell" onclick="showGroupInfoPage(this)">
         <div class="weui_cell_bd weui_cell_primary">
           <p>cell standard</p>
         </div>
         <div class="weui_cell_ft">说明文字</div>
       </a>
-      <a class="weui_cell" href="javascript:;">
+      <a class="weui_cell" onclick="showGroupInfoPage(this)">
         <div class="weui_cell_bd weui_cell_primary">
           <p>cell standard</p>
         </div>
