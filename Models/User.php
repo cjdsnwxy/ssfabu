@@ -5,11 +5,22 @@
  * Date: 16-3-23
  * Time: 下午10:33
  */
-include $_SERVER['DOCUMENT_ROOT'].'/Models/Model.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/Models/Model.php';
 class User extends Model
 {
-    public function findUser($openId){
-        return $this->collection->findOne(array('openId' => $openId));
+
+    public function createUser($openId){
+        try {
+            $this->collection->insert(array("_id" => $openId),array('safe'=>true));
+            return true;
+        }
+        catch (MongoCursorException $e) {
+            return false;
+        }
+    }
+
+    public function checkUser($openId){
+        var_dump($this->collection->findOne(array('_id' => $openId)));die;
     }
 
     public function getUserInfo($openId){
@@ -28,11 +39,18 @@ class User extends Model
         return $this->collection->findOne(array('openId' => $openId),array('CreateGroup'));
     }
 
-    public function JoinGroup($openId,$groupId){
+    public function joinGroup($openId,$groupId){
 
     }
 
-    public function CreateGroup($openId,$groupId){
-
+    public function createGroup($openId,$groupId){
+        $rew = $this->collection->update(
+            array('_id'=>$openId),
+            array('$push'=>array('createGroup'=>$groupId)),
+            array('safe'=>true)
+        );
+        if ($rew['ok'] == 1){
+            return true;
+        }
     }
 }

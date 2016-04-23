@@ -19,4 +19,18 @@ class indexController extends Controller
         //http://127.0.0.1/index.php?c=index&a=qrcode
 
     }
+
+    public function actionCreateGroup(){
+        $groupName = "嵌入式软件12-01班";
+        $intro = "班级联络通知群";
+        $group = $this->M('Group');
+        $groupId = $group->createGroup($this->openId,$groupName,$intro);
+        $user = $this->M('User');
+        $rew  = $user->createGroup($this->openId,$groupId);
+
+    }
+
+    public function actionDemo(){
+        
+    }
 }

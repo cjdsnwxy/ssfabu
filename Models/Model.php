@@ -12,9 +12,10 @@ class Model
     public $collection;
 
     function __construct(){
-        include $_SERVER['DOCUMENT_ROOT'].'/Base/mongo.php';
+        include_once $_SERVER['DOCUMENT_ROOT'].'/Base/mongo.php';
         $mongoClass = new mongoClass();
+        $this->mongo = $mongoClass->mongo;
         $Class = lcfirst(get_class($this));
-        $this->collection = $mongoClass->mongo->$Class;
+        $this->collection = $mongoClass->mongo->selectCollection($Class);
     }
 }

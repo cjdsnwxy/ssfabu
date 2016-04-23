@@ -10,7 +10,9 @@ class Controller
     public $openId;
 
     function __construct(){
-        $this->openId = '111111';
+        $this->openId = '1131111';
+        $user = $this->M('User');
+        $user->createUser($this->openId);
     }
 
     //调用redis缓存函数
@@ -28,7 +30,7 @@ class Controller
 
     //访问Model层函数
     public function M($model){
-        include $_SERVER['DOCUMENT_ROOT'].'/Models/'.$model.'.php';
+        include_once $_SERVER['DOCUMENT_ROOT'].'/Models/'.$model.'.php';
         return new $model;
     }
 
@@ -37,6 +39,7 @@ class Controller
         include $_SERVER['DOCUMENT_ROOT'].'/Views/'.$path.'.php';
     }
 
+    //ajax返回JSON数据
     public function renderAjax($obj = null){
         $json = [
             'ok' => 0

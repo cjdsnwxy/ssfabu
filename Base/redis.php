@@ -16,11 +16,11 @@ class redisClass
         $this->redis = $redis;
     }
 
-    public function set($key,$value){
-        $this->redis->set($key,$value);
+    public function redisSet($key,$value){
+       return $this->redis->set($key,$value);
     }
 
-    public function get($key){
+    public function redisGet($key){
         return $this->redis->get($key);
     }
 }
