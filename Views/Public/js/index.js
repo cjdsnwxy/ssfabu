@@ -23,6 +23,12 @@ function showCreateGroupPage(){
   $(".weui_msg").hide();
   $("#createGroupPage").show();
 }
+
+function showSuccessPage() {
+  $(".weui_msg").hide();
+  $("#successPage").show();
+}
+
 function showGroupInfoPageByJoinBtn(){
   $("#joinBtn").show();
   var groupId = $("#joinGroupId").val();
@@ -40,6 +46,9 @@ function showGroupInfoPageByJoinBtn(){
 
   }
 }
+
+
+
 function showGroupInfoPage(obj){
 
 }
@@ -50,4 +59,12 @@ function joinGroup(){
     $("#joinBtn").hide();
     $.toast("加入成功");
   }, 2000);
+}
+function createGroup() {
+  $.showLoading();
+  setTimeout(function () {
+    $.hideLoading();
+    showSuccessPage();
+  }, 2000);
+
 }

@@ -19,10 +19,6 @@ class User extends Model
         }
     }
 
-    public function checkUser($openId){
-        var_dump($this->collection->findOne(array('_id' => $openId)));die;
-    }
-
     public function getUserInfo($openId){
         return $this->collection->findOne(array('openId' => $openId));
     }
@@ -44,13 +40,16 @@ class User extends Model
     }
 
     public function createGroup($openId,$groupId){
-        $rew = $this->collection->update(
-            array('_id'=>$openId),
-            array('$push'=>array('createGroup'=>$groupId)),
-            array('safe'=>true)
-        );
-        if ($rew['ok'] == 1){
+        try {
+            $this->collection->update(
+                array('_id'=>$openId),
+                array('$push'=>array('createGroup'=>$groupId)),
+                array('safe'=>true)
+            );
             return true;
+        }
+        catch (MongoCursorException $e) {
+            return false;
         }
     }
 }

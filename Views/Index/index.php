@@ -192,7 +192,7 @@
   </div>
   <div class="weui_opr_area">
     <p class="weui_btn_area">
-      <button href="javascript:;" class="weui_btn weui_btn_primary">创建</button>
+      <button onclick="createGroup()" class="weui_btn weui_btn_primary">创建</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>
