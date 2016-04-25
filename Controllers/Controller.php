@@ -10,7 +10,7 @@ class Controller
     public $openId;
 
     function __construct(){
-        $this->openId = '444444';
+        $this->openId = '1111111';
         $user = $this->M('User');
         $user->createUser($this->openId);
     }
@@ -54,9 +54,9 @@ class Controller
     //ajax返回error
     public function renderErr($error){
         $json = [
-            'error' => $error
+            'error' => 0,
+            'msg' =>$error
         ];
-        $json = json_encode($json, JSON_UNESCAPED_UNICODE);
-        echo $json;
+        echo json_encode($json);
     }
 }

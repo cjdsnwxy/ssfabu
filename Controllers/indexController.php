@@ -17,7 +17,6 @@ class indexController extends Controller
         include $_SERVER['DOCUMENT_ROOT'].'/Ext/phpqrcode.php';
         QRcode::png('http://www.baidu.com/');
         //http://127.0.0.1/index.php?c=index&a=qrcode
-
     }
 
     public function actionCreateGroup(){
@@ -33,4 +32,36 @@ class indexController extends Controller
         $this->renderAjax($obj);
     }
 
+    public function actionJoinGroup(){
+        $groupId = $_POST['groupId'];
+        $group = $this->M('Group');
+        if($group->checkInGroup($groupId,$this->openId)){
+            $this->renderErr("您已经在群组中.");
+            die;
+        }
+        $group->joinGroup($groupId,$this->openId);
+        $user = $this->M('User');
+        $user->joinGroup($this->openId,$groupId);
+        $this->renderAjax();
+    }
+
+    public function actionFindGroup(){
+        $groupId = $_POST['groupId'];
+        // $groupId =  "00000001";
+        $group = $this->M('Group');
+        $groupInfo = $group->findGroupInfo($groupId);
+        if($groupInfo == null){
+            $this->renderErr();
+            exit;
+        }else{
+            $obj = array(
+                'groupId' => $groupId,
+                'groupName' => $groupInfo['groupName'],
+                'createTime' => date('Y-m-d',strtotime($groupInfo['createTime'])),
+                'groupNum' => $groupInfo['groupNum'],
+                'groupIntro' => $groupInfo['groupIntro']
+            );
+            $this->renderAjax($obj);
+        }
+    }
 }

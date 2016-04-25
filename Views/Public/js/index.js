@@ -29,41 +29,88 @@ function showSuccessPage() {
   $("#successPage").show();
 }
 
+function showGroupInfoPage(obj){
+  $("#groupIdInGroupInfoPage").text(obj.groupId);
+  $("#groupNameInGroupInfoPage").text(obj.groupName);
+  $("#createTimeInGroupInfoPage").text(obj.createTime);
+  $("#groupNumInGroupInfoPage").text(obj.groupNum);
+  $("#groupIntroInGroupInfoPage").text(obj.groupIntro);
+  $(".weui_msg").hide();
+  $("#groupInfoPage").show();
+}
 function showGroupInfoPageByJoinBtn(){
   $("#joinBtn").show();
   var groupId = $("#joinGroupId").val();
-  if(groupId.length == 0 || isNaN(groupId)) {
+  if(groupId.length == 0 || isNaN(groupId || groupId.length > 8)) {
     $.alert("请出入正确的群组ID", "警告", function() {
       $("#joinGroupId").focus();
     });
   } else {
     $.showLoading();
-    setTimeout(function () {
-      $.hideLoading();
-      $(".weui_msg").hide();
-      $("#groupInfoPage").show();
-    }, 2000);
-
+    $.ajax({
+      type: "POST",
+      url: "/index.php?c=index&a=findGroup",
+      dataType: "json", //表示返回值类型，不必须
+      data:{
+        groupId : groupId
+      },
+      success: function (j) {
+        if(j.ok == 0){
+          $.hideLoading();
+          $(".weui_msg").hide();
+          showGroupInfoPage(j.obj);
+        }else{
+          $.hideLoading();
+          $.toast("查无此群", "forbidden");
+          $("#joinGroupId").focus();
+        }
+      }
+    });
   }
-}
-
-
-
-function showGroupInfoPage(obj){
-
 }
 function joinGroup(){
   $.showLoading();
-  setTimeout(function () {
-    $.hideLoading();
-    $("#joinBtn").hide();
-    $.toast("加入成功");
-  }, 2000);
+  var groupId = $("#groupIdInGroupInfoPage").text();
+  $.ajax({
+    type: "POST",
+    url: "/index.php?c=index&a=joinGroup",
+    dataType: "json", //表示返回值类型，不必须
+    data:{
+      groupId:groupId
+    },
+    success: function (j) {
+      if(j.ok == 0){
+        $("#joinBtn").hide();
+        $.hideLoading();
+        $.toast("加入成功");
+      }else if(j.error == 0){
+        $("#joinBtn").hide();
+        $.hideLoading();
+        $.alert("您已经在群组中了。", "警告");
+      }else{
+        $.hideLoading();
+        $.toast("加入失败", "forbidden");
+      }
+    }
+  });
 }
 function createGroup() {
-
   var groupName = $("#groupNameInCreatePage").val();
   var intro = $("#groupIntroInCreatePage").val();
+  if(groupName.length > 20){
+    $("#groupNameInCreatePage").val("");
+    $.alert("群组名称不得超过20个字", "警告", function() {
+      $("#groupNameInCreatePage").focus();
+    });
+    return;
+  }
+  if(intro.length > 200){
+    $("#groupIntroInCreatePage").val("");
+    $.alert("群组介绍不得超过200个字", "警告", function() {
+      $("#groupIntroInCreatePage").focus();
+    });
+    return;
+  }
   $.showLoading();
   $.ajax({
     type: "POST",
@@ -76,14 +123,11 @@ function createGroup() {
     success: function (j) {
       if(j.ok == 0){
         $.hideLoading();
-        $.alert(j.obj.groupId, "新建群号");
+        $.alert(j.obj.groupId, "群号");
       }else{
         $.hideLoading();
         $.toast("新建失败", "forbidden");
       }
     }
   });
-
-
-
 }

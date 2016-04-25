@@ -73,7 +73,7 @@
           <p>群组ID</p>
         </div>
         <div class="weui_cell_ft weui_cell_primary" >
-          <p id="groupId">110110110</p>
+          <p id="groupIdInGroupInfoPage"></p>
         </div>
       </div>
       <div class="weui_cell">
@@ -81,7 +81,7 @@
           <p>群组名称</p>
         </div>
         <div class="weui_cell_ft weui_cell_primary" >
-          <p id="groupNameInGroupInfoPage">我也不知道到底要干什么的群组</p>
+          <p id="groupNameInGroupInfoPage"></p>
         </div>
       </div>
       <div class="weui_cell">
@@ -89,7 +89,7 @@
           <p>创建时间</p>
         </div>
         <div class="weui_cell_ft weui_cell_primary" >
-          <p id="createTime">2012-12-25</p>
+          <p id="createTimeInGroupInfoPage"></p>
         </div>
       </div>
       <div class="weui_cell">
@@ -97,7 +97,7 @@
           <p>当前人数</p>
         </div>
         <div class="weui_cell_ft weui_cell_primary" >
-          <p id="groupNum">123</p>
+          <p id="groupNumInGroupInfoPage"></p>
         </div>
       </div>
       <div class="weui_cell">
@@ -105,7 +105,7 @@
           <p>群组描述</p>
         </div>
         <div class="weui_cell_ft weui_cell_primary" >
-          <p align="left" id="groupIntro">Panelweui_panel由head（可选）、body、foot（可选）三部分组成，主要承载了图文组合列表weui_media_appmsg、文字组合列表weui_media_text以及小图文组合列表weui_media_text。</p>
+          <p id="groupIntroInGroupInfoPage"></p>
         </div>
       </div>
     </div>

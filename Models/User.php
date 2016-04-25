@@ -36,7 +36,17 @@ class User extends Model
     }
 
     public function joinGroup($openId,$groupId){
-
+        try {
+            $this->collection->update(
+                array('_id'=>$openId),
+                array('$push'=>array('joinGroup'=>$groupId)),
+                array('w'=>true)
+            );
+            return true;
+        }
+        catch (MongoCursorException $e) {
+            return false;
+        }
     }
 
     public function createGroup($openId,$groupId){
