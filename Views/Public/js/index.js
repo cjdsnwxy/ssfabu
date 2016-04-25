@@ -67,7 +67,7 @@ function createGroup() {
   $.showLoading();
   $.ajax({
     type: "POST",
-    url: "http://www.demo.com/index.php?c=index&a=createGroup",
+    url: "/index.php?c=index&a=createGroup",
     dataType: "json", //表示返回值类型，不必须
     data:{
       groupName : groupName,
