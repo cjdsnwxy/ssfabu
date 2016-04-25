@@ -22,7 +22,7 @@ class Group extends Model
             "groupNum" => 1,
             "groupIntro" => $intro
         );
-        $options = array('safe'=>true);
+        $options = array('w'=>true);
         try {
             $this->collection->insert($groupInfo,$options);
             return true;

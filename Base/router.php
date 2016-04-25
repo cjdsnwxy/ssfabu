@@ -18,7 +18,7 @@ $a_name = 'action'.ucfirst($a_str);
 $path = $_SERVER['DOCUMENT_ROOT'].'/Controllers/'.$c_name.'.php';
 
 //判断合法性
-if(!include $path){
+if(@!include $path){
     include $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
     defaultIndex();
 }else{

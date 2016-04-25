@@ -11,7 +11,7 @@ class User extends Model
 
     public function createUser($openId){
         try {
-            $this->collection->insert(array("_id" => $openId),array('safe'=>true));
+            $this->collection->insert(array("_id" => $openId),array('w'=>true));
             return true;
         }
         catch (MongoCursorException $e) {
@@ -44,7 +44,7 @@ class User extends Model
             $this->collection->update(
                 array('_id'=>$openId),
                 array('$push'=>array('createGroup'=>$groupId)),
-                array('safe'=>true)
+                array('w'=>true)
             );
             return true;
         }

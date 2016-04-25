@@ -11,13 +11,13 @@ return array(
             'host' => '127.0.0.1',
             'port' => 6379,
             'username' => 'admin',
-            'passwd' => 'admin'
+            'pwd' => 'admin'
         ),
     'mongo' => array(
             'host' => 'localhost',
             'port' => 27017,
             'username' => 'admin',
-            'passwd' => 'admin',
+            'pwd' => 'admin',
             'dbname' => 'ssfabu'
         ),
     'wexin' => array(
