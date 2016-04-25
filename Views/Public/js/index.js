@@ -61,10 +61,29 @@ function joinGroup(){
   }, 2000);
 }
 function createGroup() {
+
+  var groupName = $("#groupNameInCreatePage").val();
+  var intro = $("#groupIntroInCreatePage").val();
   $.showLoading();
-  setTimeout(function () {
-    $.hideLoading();
-    showSuccessPage();
-  }, 2000);
+  $.ajax({
+    type: "POST",
+    url: "http://www.demo.com/index.php?c=index&a=createGroup",
+    dataType: "json", //表示返回值类型，不必须
+    data:{
+      groupName : groupName,
+      intro : intro
+    },
+    success: function (j) {
+      if(j.ok == 0){
+        $.hideLoading();
+        $.alert(j.obj.groupId, "新建群号");
+      }else{
+        $.hideLoading();
+        $.toast("新建失败", "forbidden");
+      }
+    }
+  });
+
+
 
 }

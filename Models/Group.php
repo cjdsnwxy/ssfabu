@@ -25,6 +25,16 @@ class Group extends Model
         $options = array('w'=>true);
         try {
             $this->collection->insert($groupInfo,$options);
+            return $groupId;
+        }
+        catch (MongoCursorException $e) {
+            return false;
+        }
+    }
+
+    public function dropGroup($groupId){
+        try {
+            $this->collection->remove(array("groupId" => $groupId),array("justOne" => true));
             return true;
         }
         catch (MongoCursorException $e) {

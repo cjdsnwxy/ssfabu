@@ -18,10 +18,10 @@ return array(
             'port' => 27017,
             'username' => 'admin',
             'pwd' => 'admin',
-            'dbname' => 'ssfabu'
+            'dbName' => 'ssfabu'
         ),
-    'wexin' => array(
+    'WX' => array(
             'appId' => '',
-            'appsecret' => '',
+            'appSecret' => '',
         ),
 );

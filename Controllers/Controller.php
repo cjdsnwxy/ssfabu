@@ -50,4 +50,13 @@ class Controller
         $json = json_encode($json, JSON_UNESCAPED_UNICODE);
         echo $json;
     }
+
+    //ajax返回error
+    public function renderErr($error){
+        $json = [
+            'error' => $error
+        ];
+        $json = json_encode($json, JSON_UNESCAPED_UNICODE);
+        echo $json;
+    }
 }

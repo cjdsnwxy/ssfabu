@@ -21,16 +21,16 @@ class indexController extends Controller
     }
 
     public function actionCreateGroup(){
-        $groupName = "嵌入式软件12-01班";
-        $intro = "班级联络通知群";
+        $groupName = $_POST['groupName'];
+        $intro = $_POST['intro'];
         $group = $this->M('Group');
         $groupId = $group->createGroup($this->openId,$groupName,$intro);
         $user = $this->M('User');
-        $rew  = $user->createGroup($this->openId,$groupId);
-
+        $user->createGroup($this->openId,$groupId);
+        $obj = array(
+            'groupId' => $groupId,
+        );
+        $this->renderAjax($obj);
     }
 
-    public function actionDemo(){
-        
-    }
 }

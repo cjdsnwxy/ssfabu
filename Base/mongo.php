@@ -15,6 +15,6 @@ class mongoClass
         $conf = include 'conf.php';
         $mongodb = new MongoClient("mongodb://".$conf['mongo']['username'].":".$conf['mongo']['pwd']."@".$conf['mongo']['host'].":".$conf['mongo']['port']);
         //$mongodb = new MongoClient();
-        $this->mongo = $mongodb->selectDB($conf['mongo']['dbname']);
+        $this->mongo = $mongodb->selectDB($conf['mongo']['dbName']);
     }
 }

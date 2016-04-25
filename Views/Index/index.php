@@ -81,7 +81,7 @@
           <p>群组名称</p>
         </div>
         <div class="weui_cell_ft weui_cell_primary" >
-          <p id="groupName">我也不知道到底要干什么的群组</p>
+          <p id="groupNameInGroupInfoPage">我也不知道到底要干什么的群组</p>
         </div>
       </div>
       <div class="weui_cell">
@@ -178,7 +178,7 @@
   <div class="weui_cells weui_cells_form">
     <div class="weui_cell">
       <div class="weui_cell_bd weui_cell_primary">
-        <input class="weui_input" type="tel" placeholder="请输入群组名称">
+        <input id="groupNameInCreatePage" class="weui_input" type="text" placeholder="请输入群组名称">
       </div>
     </div>
   </div>
@@ -186,7 +186,7 @@
   <div class="weui_cells weui_cells_form">
     <div class="weui_cell">
       <div class="weui_cell_bd weui_cell_primary">
-        <textarea class="weui_textarea" placeholder="请输入群组描述" rows="3" ></textarea>
+        <textarea id="groupIntroInCreatePage" class="weui_textarea" placeholder="请输入群组描述" rows="3" ></textarea>
       </div>
     </div>
   </div>
