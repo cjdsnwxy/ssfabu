@@ -56,7 +56,7 @@ class indexController extends Controller
         $group = $this->M('Group');
         $groupInfo = $group->findGroupInfo($groupId);
         if($groupInfo == null){
-            $this->renderErr();
+            $this->renderErr("查无此群");
             exit;
         }else{
             $obj = array(

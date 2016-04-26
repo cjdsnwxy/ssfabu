@@ -32,7 +32,7 @@ class User extends Model
     }
 
     public function getCreateGroup($openId){
-        return $this->collection->findOne(array('_id' => $openId),array('createGroup'));
+        $this->collection->findOne(array('_id' => $openId),array('createGroup'));
     }
 
     public function joinGroup($openId,$groupId){

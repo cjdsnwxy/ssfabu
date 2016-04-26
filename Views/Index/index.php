@@ -124,17 +124,8 @@
     <p class="weui_msg_desc">我加入的</p>
   </div>
   <div class="weui_opr_area">
-    <div class="weui_cells weui_cells_access">
-      <a class="weui_cell" onclick="showGroupInfoPage(this)">
-        <div class="weui_cell_bd weui_cell_primary">
-          <p align="left">传媒中心通知组</p>
-        </div>
-      </a>
-      <a class="weui_cell" onclick="showGroupInfoPage(this)">
-        <div class="weui_cell_bd weui_cell_primary">
-          <p align="left">嵌入式软件12-01通知组</p>
-        </div>
-      </a>
+    <div id="myGroupList" class="weui_cells weui_cells_access">
+
     </div>
   </div>
   <div class="weui_opr_area">
@@ -149,19 +140,8 @@
     <p class="weui_msg_desc">我创建的</p>
   </div>
   <div class="weui_opr_area">
-    <div class="weui_cells weui_cells_access">
-      <a class="weui_cell" onclick="showGroupInfoPage(this)">
-        <div class="weui_cell_bd weui_cell_primary">
-          <p>cell standard</p>
-        </div>
-        <div class="weui_cell_ft">说明文字</div>
-      </a>
-      <a class="weui_cell" onclick="showGroupInfoPage(this)">
-        <div class="weui_cell_bd weui_cell_primary">
-          <p>cell standard</p>
-        </div>
-        <div class="weui_cell_ft">说明文字</div>
-      </a>
+    <div id="myCreateList" class="weui_cells weui_cells_access">
+
     </div>
   </div>
   <div class="weui_opr_area">

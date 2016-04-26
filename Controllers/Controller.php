@@ -51,7 +51,7 @@ class Controller
         echo $json;
     }
 
-    //ajax返回error
+    //ajax返回error数据
     public function renderErr($error = ""){
         $json = [
             'error' => 0,

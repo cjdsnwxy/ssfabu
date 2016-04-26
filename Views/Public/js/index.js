@@ -18,23 +18,48 @@ function showMyGroupPage(){
     dataType: "json", //表示返回值类型，不必须
     success: function (j) {
       if(j.ok == 0){
-        $("#joinBtn").hide();
         $.hideLoading();
-        $.toast("加入成功");
-      }else if(j.error == 0){
-        $("#joinBtn").hide();
-        $.hideLoading();
-        $.alert("您已经在群组中了。", "警告");
+        $(".weui_msg").hide();
+        var groupList = "";
+        $.each(j.obj,function(n,value) {
+          var list = ""
+          list += "<a class='weui_cell' onclick=\"showGroupInfoPageNoJoinBtn('"+ value.groupId +"')\"><div class='weui_cell_bd weui_cell_primary'><p align='left'>" + value.groupName +"</p></div></a>"
+          groupList+=list;
+        });
+        $("#myGroupList").children().remove();
+        $("#myGroupList").append(groupList);
+        $("#myGroupPage").show();
       }else{
         $.hideLoading();
-        $.toast("加入失败", "forbidden");
+        $.alert(j.msg);
       }
     }
   });
 }
 function showMyCreatePage(){
-  $(".weui_msg").hide();
-  $("#myCreatePage").show();
+  $.ajax({
+    type: "POST",
+    url: "/index.php?c=userApi&a=getCreateGroup",
+    dataType: "json", //表示返回值类型，不必须
+    success: function (j) {
+      if(j.ok == 0){
+        $.hideLoading();
+        $(".weui_msg").hide();
+        var groupList = "";
+        $.each(j.obj,function(n,value) {
+          var list = ""
+          list += "<a class='weui_cell' onclick=\"showGroupInfoPageNoJoinBtn('"+ value.groupId +"')\"><div class='weui_cell_bd weui_cell_primary'><p align='left'>" + value.groupName +"</p></div></a>"
+          groupList+=list;
+        });
+        $("#myCreateList").children().remove();
+        $("#myCreateList").append(groupList);
+        $("#myCreatePage").show();
+      }else{
+        $.hideLoading();
+        $.alert(j.msg);
+      }
+    }
+  });
 }
 function showCreateGroupPage(){
   $("#groupNameInCreatePage").val("");
@@ -42,12 +67,10 @@ function showCreateGroupPage(){
   $(".weui_msg").hide();
   $("#createGroupPage").show();
 }
-
-function showSuccessPage() {
-  $(".weui_msg").hide();
-  $("#successPage").show();
+function showGroupInfoPageNoJoinBtn(groupId){
+  $("#joinBtn").hide();
+  showGroupInfoPage(groupId);
 }
-
 function showGroupInfoPage(groupId){
   $.showLoading();
   $.ajax({
@@ -145,7 +168,8 @@ function createGroup() {
       if(j.ok == 0){
         $.hideLoading();
         $.alert(j.obj.groupId, "群号(长按复制)", function() {
-          showIndexPage();
+          $("#joinBtn").hide();
+          showGroupInfoPage(j.obj.groupId);
         });
       }else{
         $.hideLoading();

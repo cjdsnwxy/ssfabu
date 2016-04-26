@@ -32,6 +32,21 @@ class Group extends Model
         }
     }
 
+    public function getGroupNameById($groupIdList){
+        $res = $this->collection->find(array(
+            "_id" => array('$in' => $groupIdList)
+        ));
+        $list = array();
+        foreach ($res as $groupInfo) {
+            $arr = array(
+                'groupId' => $groupInfo['_id'],
+                'groupName' => $groupInfo['groupName']
+            );
+            $list = array_merge_recursive($list,array($arr));
+        }
+        return $list;
+    }
+
     public function findGroupInfo($groupId){
         return $this->collection->findOne(array("_id" => $groupId));
     }
@@ -40,7 +55,7 @@ class Group extends Model
         try {
             $this->collection->update(
                 array('_id'=>$groupId),
-                array('$push'=>array('member'=>$openId)),
+                array('$push'=>array('member'=>$openId),'$inc'=>array('groupNum'=>1)),
                 array('w'=>true)
             );
             return true;
@@ -52,11 +67,15 @@ class Group extends Model
 
     public function checkInGroup($groupId,$openId){
         try {
-           $res = $this->collection->findOne(array('member' => $openId),array('_id' => $groupId));
-            return $res;
+            $res = $this->collection->findOne(array('member' => $openId,'_id' => $groupId));
+            if($res){
+                return true;
+            }else{
+                return false;
+            }
         }
         catch (MongoCursorException $e) {
-            return false;
+
         }
     }
 
