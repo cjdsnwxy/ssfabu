@@ -12,14 +12,33 @@ function showJoinGroupPage(){
   $("#joinGroupId").focus();
 }
 function showMyGroupPage(){
-  $(".weui_msg").hide();
-  $("#myGroupPage").show();
+  $.ajax({
+    type: "POST",
+    url: "/index.php?c=userApi&a=getJoinGroup",
+    dataType: "json", //表示返回值类型，不必须
+    success: function (j) {
+      if(j.ok == 0){
+        $("#joinBtn").hide();
+        $.hideLoading();
+        $.toast("加入成功");
+      }else if(j.error == 0){
+        $("#joinBtn").hide();
+        $.hideLoading();
+        $.alert("您已经在群组中了。", "警告");
+      }else{
+        $.hideLoading();
+        $.toast("加入失败", "forbidden");
+      }
+    }
+  });
 }
 function showMyCreatePage(){
   $(".weui_msg").hide();
   $("#myCreatePage").show();
 }
 function showCreateGroupPage(){
+  $("#groupNameInCreatePage").val("");
+  $("#groupIntroInCreatePage").val("");
   $(".weui_msg").hide();
   $("#createGroupPage").show();
 }
@@ -29,14 +48,34 @@ function showSuccessPage() {
   $("#successPage").show();
 }
 
-function showGroupInfoPage(obj){
-  $("#groupIdInGroupInfoPage").text(obj.groupId);
-  $("#groupNameInGroupInfoPage").text(obj.groupName);
-  $("#createTimeInGroupInfoPage").text(obj.createTime);
-  $("#groupNumInGroupInfoPage").text(obj.groupNum);
-  $("#groupIntroInGroupInfoPage").text(obj.groupIntro);
-  $(".weui_msg").hide();
-  $("#groupInfoPage").show();
+function showGroupInfoPage(groupId){
+  $.showLoading();
+  $.ajax({
+    type: "POST",
+    url: "/index.php?c=index&a=findGroup",
+    dataType: "json", //表示返回值类型，不必须
+    data:{
+      groupId : groupId
+    },
+    success: function (j) {
+      if(j.ok == 0){
+        $.hideLoading();
+        $(".weui_msg").hide();
+        $("#groupIdInGroupInfoPage").text(j.obj.groupId);
+        $("#groupNameInGroupInfoPage").text(j.obj.groupName);
+        $("#createTimeInGroupInfoPage").text(j.obj.createTime);
+        $("#groupNumInGroupInfoPage").text(j.obj.groupNum);
+        $("#groupIntroInGroupInfoPage").text(j.obj.groupIntro);
+        $(".weui_msg").hide();
+        $("#groupInfoPage").show();
+      }else{
+        $.hideLoading();
+        $.toast("查无此群", "forbidden");
+        showIndexPage();
+      }
+    }
+  });
+
 }
 function showGroupInfoPageByJoinBtn(){
   $("#joinBtn").show();
@@ -46,28 +85,10 @@ function showGroupInfoPageByJoinBtn(){
       $("#joinGroupId").focus();
     });
   } else {
-    $.showLoading();
-    $.ajax({
-      type: "POST",
-      url: "/index.php?c=index&a=findGroup",
-      dataType: "json", //表示返回值类型，不必须
-      data:{
-        groupId : groupId
-      },
-      success: function (j) {
-        if(j.ok == 0){
-          $.hideLoading();
-          $(".weui_msg").hide();
-          showGroupInfoPage(j.obj);
-        }else{
-          $.hideLoading();
-          $.toast("查无此群", "forbidden");
-          $("#joinGroupId").focus();
-        }
-      }
-    });
+    showGroupInfoPage(groupId);
   }
 }
+
 function joinGroup(){
   $.showLoading();
   var groupId = $("#groupIdInGroupInfoPage").text();
@@ -123,7 +144,9 @@ function createGroup() {
     success: function (j) {
       if(j.ok == 0){
         $.hideLoading();
-        $.alert(j.obj.groupId, "群号");
+        $.alert(j.obj.groupId, "群号(长按复制)", function() {
+          showIndexPage();
+        });
       }else{
         $.hideLoading();
         $.toast("新建失败", "forbidden");

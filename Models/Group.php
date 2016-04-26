@@ -52,8 +52,8 @@ class Group extends Model
 
     public function checkInGroup($groupId,$openId){
         try {
-            $this->collection->find(array('member' => $openId),array('_id' => $groupId));
-            return true;
+           $res = $this->collection->findOne(array('member' => $openId),array('_id' => $groupId));
+            return $res;
         }
         catch (MongoCursorException $e) {
             return false;

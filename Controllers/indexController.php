@@ -9,16 +9,19 @@
 include $_SERVER['DOCUMENT_ROOT'].'/Controllers/Controller.php';
 class indexController extends Controller
 {
+    //显示indexPage
     public function actionIndex(){
         $this->display('Index/index');
     }
 
+    //获取二维码
     public function actionQrcode(){
         include $_SERVER['DOCUMENT_ROOT'].'/Ext/phpqrcode.php';
         QRcode::png('http://www.baidu.com/');
         //http://127.0.0.1/index.php?c=index&a=qrcode
     }
 
+    //创建群组
     public function actionCreateGroup(){
         $groupName = $_POST['groupName'];
         $intro = $_POST['intro'];
@@ -32,6 +35,7 @@ class indexController extends Controller
         $this->renderAjax($obj);
     }
 
+    //加入群组
     public function actionJoinGroup(){
         $groupId = $_POST['groupId'];
         $group = $this->M('Group');
@@ -45,6 +49,7 @@ class indexController extends Controller
         $this->renderAjax();
     }
 
+    //查找群组
     public function actionFindGroup(){
         $groupId = $_POST['groupId'];
         // $groupId =  "00000001";

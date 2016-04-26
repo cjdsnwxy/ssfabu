@@ -20,19 +20,19 @@ class User extends Model
     }
 
     public function getUserInfo($openId){
-        return $this->collection->findOne(array('openId' => $openId));
+        return $this->collection->findOne(array('_id' => $openId));
     }
 
     public function getUserName($openId){
-        return $this->collection->findOne(array('openId' => $openId),array('username'));
+        return $this->collection->findOne(array('_id' => $openId),array('username'));
     }
 
     public function getJoinGroup($openId){
-        return $this->collection->findOne(array('openId' => $openId),array('joinGroup'));
+        return $this->collection->findOne(array('_id' => $openId),array('joinGroup'));
     }
 
     public function getCreateGroup($openId){
-        return $this->collection->findOne(array('openId' => $openId),array('CreateGroup'));
+        return $this->collection->findOne(array('_id' => $openId),array('createGroup'));
     }
 
     public function joinGroup($openId,$groupId){
