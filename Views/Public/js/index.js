@@ -29,12 +29,18 @@ function showMyGroupPage(){
         $("#myGroupList").children().remove();
         $("#myGroupList").append(groupList);
         $("#myGroupPage").show();
+        $("#blackBtn").removeAttr("onclick");
+        $("#blackBtn").show().attr("onclick","blackMyGroupPage();");
       }else{
         $.hideLoading();
         $.alert(j.msg);
       }
     }
   });
+}
+function blackMyGroupPage(){
+  $(".weui_msg").hide();
+  $("#myGroupPage").show();
 }
 function showMyCreatePage(){
   $.ajax({
@@ -54,12 +60,18 @@ function showMyCreatePage(){
         $("#myCreateList").children().remove();
         $("#myCreateList").append(groupList);
         $("#myCreatePage").show();
+        $("#blackBtn").removeAttr("onclick");
+        $("#blackBtn").show().attr("onclick","blackMyCreatePage();");
       }else{
         $.hideLoading();
         $.alert(j.msg);
       }
     }
   });
+}
+function blackMyCreatePage(){
+  $(".weui_msg").hide();
+  $("#myCreatePage").show();
 }
 function showCreateGroupPage(){
   $("#groupNameInCreatePage").val("");
@@ -94,20 +106,21 @@ function showGroupInfoPage(groupId){
       }else{
         $.hideLoading();
         $.toast("查无此群", "forbidden");
-        showIndexPage();
       }
     }
   });
 
 }
 function showGroupInfoPageByJoinBtn(){
-  $("#joinBtn").show();
+
   var groupId = $("#joinGroupId").val();
   if(groupId.length == 0 || isNaN(groupId || groupId.length > 8)) {
     $.alert("请出入正确的群组ID", "警告", function() {
       $("#joinGroupId").focus();
     });
   } else {
+    $("#joinBtn").show();
+    $("#blackBtn").hide();
     showGroupInfoPage(groupId);
   }
 }

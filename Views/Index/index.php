@@ -113,6 +113,7 @@
       </div>
     </div>
     <p class="weui_btn_area">
+      <button id="blackBtn" class="weui_btn weui_btn_primary" style="display: none;">返回</button>
       <button id="joinBtn" onclick="joinGroup()" class="weui_btn weui_btn_primary">加入</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
