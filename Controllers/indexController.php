@@ -21,6 +21,25 @@ class indexController extends Controller
         //http://127.0.0.1/index.php?c=index&a=qrcode
     }
 
+    //扫描二维码加入群组
+    public function actionJoinGroupByQrc($groupId){
+        $group = $this->M('Group');
+        if($group->checkInGroup($groupId,$this->openId)){
+            $this->display('Index/msgPage',array(
+                'type'=>'error',
+                'msg' => '您已经在群组内'
+            ));
+        }
+        $group->joinGroup($groupId,$this->openId);
+        $user = $this->M('User');
+        $user->joinGroup($this->openId,$groupId);
+        $this->display('Index/msgPage',array(
+            'type' => 'success',
+            'groupId' => $groupId,
+            'msg' => '加入群组成功'
+        ));
+    }
+
     //创建群组
     public function actionCreateGroup(){
         $groupName = $_POST['groupName'];

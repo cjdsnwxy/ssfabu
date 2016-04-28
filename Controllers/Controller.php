@@ -36,7 +36,9 @@ class Controller
 
     //访问View层函数
     public function display($path){
+        include $_SERVER['DOCUMENT_ROOT'].'/Views/Index/header.php';
         include $_SERVER['DOCUMENT_ROOT'].'/Views/'.$path.'.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/Views/Index/footer.php';
     }
 
     //ajax返回JSON数据
