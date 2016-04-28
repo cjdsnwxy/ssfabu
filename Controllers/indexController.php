@@ -11,7 +11,7 @@ class indexController extends Controller
 {
     //显示indexPage
     public function actionIndex(){
-        $this->display('Index/index');
+       $this->display('Index/index');
     }
 
     //获取二维码
@@ -26,7 +26,7 @@ class indexController extends Controller
         $group = $this->M('Group');
         if($group->checkInGroup($groupId,$this->openId)){
             $this->display('Index/msgPage',array(
-                'type'=>'error',
+                'type'=>'warn',
                 'msg' => '您已经在群组内'
             ));
         }
@@ -35,7 +35,6 @@ class indexController extends Controller
         $user->joinGroup($this->openId,$groupId);
         $this->display('Index/msgPage',array(
             'type' => 'success',
-            'groupId' => $groupId,
             'msg' => '加入群组成功'
         ));
     }
@@ -87,5 +86,27 @@ class indexController extends Controller
             );
             $this->renderAjax($obj);
         }
+    }
+
+    //解散群组
+    public function dropGroup($groupId){
+        //验证是否是创建人
+
+        $group = $this->M('Group');
+        $group->dropGroup($groupId);
+        $user = $this->M('User');
+        $user->dropGroup($groupId);
+    }
+    //退出群组
+    public function quitGroup($groupId){
+        $user = $this->M('User');
+        $res = $user->quitGroup($groupId);
+        if($res == false){
+            $this->renderErr('您已不再此群中');
+        }else{
+            $group = $this->M('Group');
+            $group->quitGroup($groupId);
+        }
+        $this->renderAjax();
     }
 }
