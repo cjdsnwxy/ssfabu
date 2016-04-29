@@ -91,12 +91,16 @@ class indexController extends Controller
     //解散群组
     public function dropGroup($groupId){
         //验证是否是创建人
-
-        $group = $this->M('Group');
-        $group->dropGroup($groupId);
         $user = $this->M('User');
-        $user->dropGroup($groupId);
+        if($user->checkIsCreate($this->openId,$groupId)){
+            $user->dropGroup($groupId);
+            $group = $this->M('Group');
+            $group->dropGroup($groupId);
+        }else{
+            $this->renderErr('无权操作');
+        }
     }
+
     //退出群组
     public function quitGroup($groupId){
         $user = $this->M('User');
