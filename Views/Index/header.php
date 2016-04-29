@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: king
- * Date: 16-4-28
- * Time: 下午5:17
- */
-?>
 <!DOCTYPE html>
 <html>
 <head>

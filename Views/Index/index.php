@@ -1,12 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: king
- * Date: 16-3-23
- * Time: 下午10:07
- */
-?>
-
 <div id="indexPage"  class="weui_msg">
   <div class="weui_icon_area">
     <img src="./Views/Public/img/icon.png">
