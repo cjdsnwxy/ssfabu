@@ -92,7 +92,10 @@
       </div>
     </div>
     <p class="weui_btn_area">
-      <button id="blackBtn" class="weui_btn weui_btn_primary" style="display: none;">返回</button>
+      <button id="quitGroupBtn" onclick="quitGroup()" class="weui_btn weui_btn_warn" >退出</button>
+      <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >修改</button>
+      <button id="DropGroupBtn" onclick="dropGroup()" class="weui_btn weui_btn_warn" >解散群组</button>
+      <button id="blackBtn" class="weui_btn weui_btn_primary" style="display: none;">返回列表</button>
       <button id="joinBtn" onclick="joinGroup()" class="weui_btn weui_btn_primary">加入</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
@@ -160,15 +163,33 @@
     </p>
   </div>
 </div>
-<div id="successPage" style="display: none;" class="weui_msg">
-  <div class="weui_icon_area"><i class="weui_icon_safe weui_icon_safe_success"></i></div>
+<div id="updateGroupPage" style="display: none;" class="weui_msg">
+  <div class="weui_icon_area">
+    <img src="./Views/Public/img/icon.png">
+  </div>
   <div class="weui_text_area">
-    <h2 class="weui_msg_title">操作成功</h2>
-    <p id="successMeg" class="weui_msg_desc"></p>
+    <h1 class="weui_msg_title">神速发布系统</h1>
+    <p class="weui_msg_desc" id="groupIdInUpdateGroupPage"></p>
+  </div>
+  <div class="weui_cells_title">群组名称</div>
+  <div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">
+        <input id="groupNameInUpdateCreatePage" class="weui_input" type="text">
+      </div>
+    </div>
+  </div>
+  <div class="weui_cells_title">群组描述</div>
+  <div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">
+        <textarea id="groupIntroInUpdateCreatePage" class="weui_textarea" rows="3" ></textarea>
+      </div>
+    </div>
   </div>
   <div class="weui_opr_area">
     <p class="weui_btn_area">
-      <a href="" class="weui_btn weui_btn_primary">查看详情</a>
+      <button onclick="updateGroup()" class="weui_btn weui_btn_primary">更新</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>

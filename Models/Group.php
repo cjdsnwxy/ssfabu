@@ -65,6 +65,20 @@ class Group extends Model
         }
     }
 
+    public function checkIsCreate($groupId,$openId){
+        try {
+            $res = $this->collection->findOne(array('createUser' => $openId,'_id' => $groupId));
+            if($res){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        catch (MongoCursorException $e) {
+
+        }
+    }
+
     public function checkInGroup($groupId,$openId){
         try {
             $res = $this->collection->findOne(array('member' => $openId,'_id' => $groupId));
@@ -79,9 +93,36 @@ class Group extends Model
         }
     }
 
+    public function updateGroup($groupId,$groupName,$intro){
+        try {
+            $this->collection->update(
+                array('_id'=>$groupId),
+                array('$set'=>array('groupName' => $groupName,'groupIntro' =>$intro))
+            );
+            return true;
+        }
+        catch (MongoCursorException $e) {
+            return false;
+        }
+    }
+
     public function dropGroup($groupId){
         try {
             $this->collection->remove(array("_id" => $groupId),array("justOne" => true));
+            return true;
+        }
+        catch (MongoCursorException $e) {
+            return false;
+        }
+    }
+
+    public function quitGroup($groupId,$openId){
+        try {
+            $this->collection->update(
+                array('_id'=>$groupId),
+                array('$pull'=>array('member'=>$openId)),
+                array('w'=>true)
+            );
             return true;
         }
         catch (MongoCursorException $e) {

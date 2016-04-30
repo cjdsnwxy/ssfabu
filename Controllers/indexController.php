@@ -57,12 +57,16 @@ class indexController extends Controller
     public function actionJoinGroup(){
         $groupId = $_POST['groupId'];
         $group = $this->M('Group');
+        $user = $this->M('User');
+        if($group->checkIsCreate($groupId,$this->openId)){
+            $this->renderErr("您是群主");
+            die;
+        }
         if($group->checkInGroup($groupId,$this->openId)){
             $this->renderErr("您已经在群组中.");
             die;
         }
         $group->joinGroup($groupId,$this->openId);
-        $user = $this->M('User');
         $user->joinGroup($this->openId,$groupId);
         $this->renderAjax();
     }
@@ -88,28 +92,49 @@ class indexController extends Controller
         }
     }
 
+    //修改群组
+    public function actionUpdateGroup(){
+        $groupId = $_POST['groupId'];
+        $groupName = $_POST['groupName'];
+        $intro = $_POST['intro'];
+        $group = $this->M('Group');
+        if($group->checkIsCreate($groupId,$this->openId)){
+            $group->updateGroup($groupId,$groupName,$intro);
+            $this->renderAjax();
+        }else{
+            $this->renderErr('您没有权限');
+        }
+    }
+
     //解散群组
-    public function dropGroup($groupId){
+    public function actionDropGroup(){
+        $groupId = $_POST['groupId'];
         //验证是否是创建人
         $user = $this->M('User');
         if($user->checkIsCreate($this->openId,$groupId)){
-            $user->dropGroup($groupId);
+            $res = $user->dropGroup($this->openId,$groupId);
             $group = $this->M('Group');
-            $group->dropGroup($groupId);
+            $rew = $group->dropGroup($groupId);
+            if($res && $rew){
+                $this->renderAjax();
+            }else{
+                $this->renderErr('操作失败');
+            }
         }else{
-            $this->renderErr('无权操作');
+            $this->renderErr('您没有权限');
         }
     }
 
     //退出群组
-    public function quitGroup($groupId){
+    public function actionQuitGroup(){
+        $groupId = $_POST['groupId'];
         $user = $this->M('User');
-        $res = $user->quitGroup($groupId);
+        $res = $user->quitGroup($this->openId,$groupId);
         if($res == false){
-            $this->renderErr('您已不再此群中');
+            $this->renderErr('您不再此群中');
         }else{
             $group = $this->M('Group');
-            $group->quitGroup($groupId);
+            $group->quitGroup($groupId,$this->openId);
         }
         $this->renderAjax();
     }
