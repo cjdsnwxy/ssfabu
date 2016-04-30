@@ -93,7 +93,10 @@
     </div>
     <p class="weui_btn_area">
       <button id="quitGroupBtn" onclick="quitGroup()" class="weui_btn weui_btn_warn" >退出</button>
-      <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >修改</button>
+      <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >发送消息</button>
+      <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >查看成员</button>
+      <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >查看历史消息</button>
+      <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >修改群组信息</button>
       <button id="DropGroupBtn" onclick="dropGroup()" class="weui_btn weui_btn_warn" >解散群组</button>
       <button id="blackBtn" class="weui_btn weui_btn_primary" style="display: none;">返回列表</button>
       <button id="joinBtn" onclick="joinGroup()" class="weui_btn weui_btn_primary">加入</button>
