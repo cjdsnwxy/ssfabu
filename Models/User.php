@@ -102,4 +102,16 @@ class User extends Model
         }
     }
 
+    public function updateName($openId,$newName){
+        try {
+            $this->collection->update(
+                array('_id'=>$openId),
+                array('name'=>$newName)
+            );
+            return true;
+        }
+        catch (MongoCursorException $e) {
+            return false;
+        }
+    }
 }

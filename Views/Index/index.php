@@ -93,13 +93,14 @@
     </div>
     <p class="weui_btn_area">
       <button id="quitGroupBtn" onclick="quitGroup()" class="weui_btn weui_btn_warn" >退出</button>
-      <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >发送消息</button>
-      <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >查看成员</button>
-      <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >查看历史消息</button>
+      <button id="updateGroupBtn" onclick="showSendMsgPage()" class="weui_btn weui_btn_primary" >发送消息</button>
+      <button id="updateGroupBtn" onclick="showMemberPage()" class="weui_btn weui_btn_primary" >查看成员</button>
+      <button id="updateGroupBtn" onclick="showHistoryMsgPage()" class="weui_btn weui_btn_primary" >查看历史消息</button>
       <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >修改群组信息</button>
       <button id="DropGroupBtn" onclick="dropGroup()" class="weui_btn weui_btn_warn" >解散群组</button>
       <button id="blackBtn" class="weui_btn weui_btn_primary" style="display: none;">返回列表</button>
       <button id="joinBtn" onclick="joinGroup()" class="weui_btn weui_btn_primary">加入</button>
+      <button id="updateNameBtn" onclick="updateName()" class="weui_btn weui_btn_primary">修改姓名</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>
@@ -193,6 +194,58 @@
   <div class="weui_opr_area">
     <p class="weui_btn_area">
       <button onclick="updateGroup()" class="weui_btn weui_btn_primary">更新</button>
+      <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
+    </p>
+  </div>
+</div>
+<div id="sendMsgPage" style="display: none;" class="weui_msg">
+  <div class="weui_text_area">
+    <h1 class="weui_msg_title">发送消息</h1>
+  </div>
+  <div class="weui_cells_title"><b>群组ID</b></div>
+  <div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">
+        <input id="groupIdInSendMsgPage" class="weui_input" type="text" disabled="true">
+      </div>
+    </div>
+  </div>
+  <div class="weui_cells_title">消息名称</div>
+  <div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">
+        <input id="msgTitleInSendMsgPage" class="weui_input" type="text">
+      </div>
+    </div>
+  </div>
+  <div class="weui_cells_title">开始时间</div>
+  <div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">
+        <input id="startTimeInSendMsgPage" class="weui_input" type="text">
+      </div>
+    </div>
+  </div>
+  <div class="weui_cells_title">地点</div>
+  <div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">
+        <input id="addressInSendMsgPage" class="weui_input" type="text">
+      </div>
+    </div>
+  </div>
+  <div class="weui_cells_title">详情描述</div>
+  <div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+      <div class="weui_cell_bd weui_cell_primary">
+        <textarea id="introInSendMsgPage" class="weui_textarea" rows="3" ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="weui_opr_area">
+    <p class="weui_btn_area">
+      <button onclick="sendMsg()" class="weui_btn weui_btn_primary">发送</button>
+      <button onclick="showMyCreatePage()" class="weui_btn weui_btn_default">返回列表</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>

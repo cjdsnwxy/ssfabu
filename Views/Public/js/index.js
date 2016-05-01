@@ -39,7 +39,6 @@ function showMyGroupPage(){
     }
   });
 }
-
 function showMyCreatePage(){
   $.ajax({
     type: "POST",
@@ -68,6 +67,7 @@ function showMyCreatePage(){
     }
   });
 }
+
 function blackMyCreatePage(){
   $(".weui_msg").hide();
   $("#myCreatePage").show();
@@ -77,6 +77,16 @@ function showCreateGroupPage(){
   $("#groupIntroInCreatePage").val("");
   $(".weui_msg").hide();
   $("#createGroupPage").show();
+}
+function showSendMsgPage(){
+  var groupId = $("#groupIdInGroupInfoPage").html();
+  $("#groupIdInSendMsgPage").val(groupId);
+  $("#msgTitleInSendMsgPage").val("");
+  $("#startTimeInSendMsgPage").datetimePicker().val("");
+  $("#addressInSendMsgPage").val("");
+  $("#introInSendMsgPage").val("");
+  $(".weui_msg").hide();
+  $("#sendMsgPage").show();
 }
 function showGroupInfoPageByJoinBtn(){
   $("#quitGroupBtn").hide();
@@ -133,7 +143,6 @@ function showGroupInfoPage(groupId){
     }
   });
 }
-
 function showUpdateGroupPage() {
   $(".weui_msg").hide();
   var groupId = $("#groupIdInGroupInfoPage").text();
@@ -304,6 +313,36 @@ function quitGroup() {
     });
   }, function() {
     //点击取消后的回调函数
+  });
+}
+function sendMsg() {
+  var groupId = $("#groupIdInSendMsgPage").val();
+  var msgTitle = $("#msgTitleInSendMsgPage").val();
+  var startTime = $("#startTimeInSendMsgPage").val();
+  var address = $("#addressInSendMsgPage").val();
+  var intro = $("#introInSendMsgPage").val();
+  $.showLoading();
+  $.ajax({
+    type: "POST",
+    url: "/index.php?c=messageApi&a=sendMsg",
+    dataType: "json", //表示返回值类型，不必须
+    data:{
+      groupId : groupId,
+      title : msgTitle,
+      startTime : startTime,
+      address : address,
+      intro : intro
+    },
+    success: function (j) {
+      if(j.ok == 0){
+        $.hideLoading();
+        showGroupInfoPageByMyCreatePage(groupId);
+        $.toast("发送成功");
+      }else{
+        $.hideLoading();
+        $.toast(j.msg, "forbidden");
+      }
+    }
   });
 }
 

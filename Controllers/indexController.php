@@ -138,4 +138,19 @@ class indexController extends Controller
         }
         $this->renderAjax();
     }
+
+    //修改姓名
+    public function actionUpdateName(){
+        if(empty($_POST['newName'])){
+            
+        }
+        $newName = $_POST['newName'];
+        $user = $this->M('User');
+        $res = $user->updateName($this->openId,$newName);
+        if($res){
+            $this->renderAjax();
+        }else{
+            $this->renderErr('修改失败，请重试');
+        }
+    }
 }
