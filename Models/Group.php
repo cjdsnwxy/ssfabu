@@ -47,15 +47,20 @@ class Group extends Model
         return $list;
     }
 
+    public function getMember($groupId){
+        return $this->collection->findOne(array("_id" => $groupId),array("member"));
+
+    }
+    
     public function findGroupInfo($groupId){
         return $this->collection->findOne(array("_id" => $groupId));
     }
 
-    public function joinGroup($groupId,$openId){
+    public function joinGroup($groupId,$openId,$name){
         try {
             $this->collection->update(
                 array('_id'=>$groupId),
-                array('$push'=>array('member'=>$openId),'$inc'=>array('groupNum'=>1)),
+                array('$set'=>array("member.$openId" =>$name),'$inc'=>array('groupNum'=>1)),
                 array('w'=>true)
             );
             return true;
@@ -81,15 +86,15 @@ class Group extends Model
 
     public function checkInGroup($groupId,$openId){
         try {
-            $res = $this->collection->findOne(array('member' => $openId,'_id' => $groupId));
-            if($res){
+            $res = $this->collection->findOne(array('_id' => $groupId),array("member.$openId"));
+            if(isset($res["member"])){
                 return true;
             }else{
                 return false;
             }
         }
         catch (MongoCursorException $e) {
-
+            
         }
     }
 

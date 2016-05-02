@@ -22,14 +22,14 @@ function showMyGroupPage(){
         $(".weui_msg").hide();
         var groupList = "";
         $.each(j.obj,function(n,value) {
-          var list = ""
+          var list = "";
           list += "<a class='weui_cell' onclick=\"showGroupInfoPageByMyGroupPage('"+ value.groupId +"')\"><div class='weui_cell_bd weui_cell_primary'><p align='left'>" + value.groupName +"</p></div></a>"
           groupList+=list;
         });
         $("#myGroupList").children().remove();
         $("#myGroupList").append(groupList);
         $("#blackBtn").removeAttr("onclick");
-        $("#blackBtn").show().attr("onclick","blackMyGroupPage();");
+        $("#blackBtn").show().attr("onclick","showMyGroupPage();");
         $("#myGroupPage").show();
       }else{
         $.hideLoading();
@@ -50,14 +50,14 @@ function showMyCreatePage(){
         $(".weui_msg").hide();
         var groupList = "";
         $.each(j.obj,function(n,value) {
-          var list = ""
+          var list = "";
           list += "<a class='weui_cell' onclick=\"showGroupInfoPageByMyCreatePage('"+ value.groupId +"')\"><div class='weui_cell_bd weui_cell_primary'><p align='left'>" + value.groupName +"</p></div></a>"
           groupList+=list;
         });
         $("#myCreateList").children().remove();
         $("#myCreateList").append(groupList);
         $("#blackBtn").removeAttr("onclick");
-        $("#blackBtn").show().attr("onclick","blackMyCreatePage();");
+        $("#blackBtn").show().attr("onclick","showMyCreatePage();");
         $("#myCreatePage").show();
       }else{
         $.hideLoading();
@@ -66,11 +66,6 @@ function showMyCreatePage(){
       }
     }
   });
-}
-
-function blackMyCreatePage(){
-  $(".weui_msg").hide();
-  $("#myCreatePage").show();
 }
 function showCreateGroupPage(){
   $("#groupNameInCreatePage").val("");
@@ -90,6 +85,10 @@ function showSendMsgPage(){
 }
 function showGroupInfoPageByJoinBtn(){
   $("#quitGroupBtn").hide();
+  $("#sendMsgBtn").hide();
+  $("#showMemberBtn").hide();
+  $("#showHisMsgBtn").hide();
+  $("#updateNameBtn").hide();
   $("#joinBtn").show();
   $("#updateGroupBtn").hide();
   $("#DropGroupBtn").hide();
@@ -105,6 +104,10 @@ function showGroupInfoPageByJoinBtn(){
 }
 function showGroupInfoPageByMyGroupPage(groupId) {
   $("#quitGroupBtn").show();
+  $("#updateNameBtn").show();
+  $("#sendMsgBtn").hide();
+  $("#showMemberBtn").hide();
+  $("#showHisMsgBtn").hide();
   $("#joinBtn").hide();
   $("#updateGroupBtn").hide();
   $("#DropGroupBtn").hide();
@@ -112,16 +115,20 @@ function showGroupInfoPageByMyGroupPage(groupId) {
 }
 function showGroupInfoPageByMyCreatePage(groupId){
   $("#quitGroupBtn").hide();
+  $("#sendMsgBtn").show();
+  $("#showMemberBtn").show();
+  $("#showHisMsgBtn").show();
   $("#joinBtn").hide();
   $("#updateGroupBtn").show();
   $("#DropGroupBtn").show();
+  $("#updateNameBtn").hide();
   showGroupInfoPage(groupId);
 }
 function showGroupInfoPage(groupId){
   $.showLoading();
   $.ajax({
     type: "POST",
-    url: "/index.php?c=index&a=findGroup",
+    url: "/index.php?c=groupApi&a=findGroup",
     dataType: "json", //表示返回值类型，不必须
     data:{
       groupId : groupId
@@ -153,30 +160,70 @@ function showUpdateGroupPage() {
   $("#groupIntroInUpdateCreatePage").val(groupIntro);
   $("#updateGroupPage").show();
 }
-function joinGroup(){
+function showMemberPage() {
   $.showLoading();
   var groupId = $("#groupIdInGroupInfoPage").text();
   $.ajax({
     type: "POST",
-    url: "/index.php?c=index&a=joinGroup",
+    url: "/index.php?c=groupApi&a=getMemberList",
     dataType: "json", //表示返回值类型，不必须
     data:{
       groupId:groupId
     },
     success: function (j) {
       if(j.ok == 0){
-        $("#joinBtn").hide();
+        var memberList = "";
+        $.each(j.obj,function(n,value) {
+          var list = "";
+          list += "<a class='weui_cell'\"><div class='weui_cell_bd weui_cell_primary'><p align='left'>" + value.memberName +"</p></div></a>"
+          memberList+=list;
+        });
         $.hideLoading();
-        $.toast("加入成功");
+        $("#memberList").children().remove();
+        $("#memberList").append(memberList);
+        $("#memberPage").show();
       }else if(j.error == 0){
-        $("#joinBtn").hide();
         $.hideLoading();
         $.alert(j.msg, "警告");
-      }else{
-        $.hideLoading();
-        $.toast("加入失败", "forbidden");
       }
     }
+  });
+
+}
+function joinGroup(){
+  $.prompt("","请输入你的名字", function(text) {
+    var groupId = $("#groupIdInGroupInfoPage").text();
+    var name = text;
+    if(name == null){
+      $.toast("请输入名字", "forbidden");
+      return;
+    }
+    $.showLoading();
+    $.ajax({
+      type: "POST",
+      url: "/index.php?c=groupApi&a=joinGroup",
+      dataType: "json", //表示返回值类型，不必须
+      data:{
+        groupId : groupId,
+        name : name
+      },
+      success: function (j) {
+        if(j.ok == 0){
+          $("#joinBtn").hide();
+          $.hideLoading();
+          $.toast("加入成功");
+        }else if(j.error == 0){
+          $("#joinBtn").hide();
+          $.hideLoading();
+          $.alert(j.msg, "警告");
+        }else{
+          $.hideLoading();
+          $.toast("加入失败", "forbidden");
+        }
+      }
+    });
+  }, function() {
+    showJoinGroupPage();
   });
 }
 function createGroup() {
@@ -199,7 +246,7 @@ function createGroup() {
   $.showLoading();
   $.ajax({
     type: "POST",
-    url: "/index.php?c=index&a=createGroup",
+    url: "/index.php?c=groupApi&a=createGroup",
     dataType: "json", //表示返回值类型，不必须
     data:{
       groupName : groupName,
@@ -240,7 +287,7 @@ function updateGroup() {
   $.showLoading();
   $.ajax({
     type: "POST",
-    url: "/index.php?c=index&a=updateGroup",
+    url: "/index.php?c=groupApi&a=updateGroup",
     dataType: "json", //表示返回值类型，不必须
     data:{
       groupId : groupId,
@@ -266,7 +313,7 @@ function dropGroup() {
       $.showLoading();
       $.ajax({
         type: "POST",
-        url: "/index.php?c=index&a=dropGroup",
+        url: "/index.php?c=groupApi&a=dropGroup",
         dataType: "json", //表示返回值类型，不必须
         data:{
           groupId : groupId
@@ -296,7 +343,7 @@ function quitGroup() {
     $.showLoading();
     $.ajax({
       type: "POST",
-      url: "/index.php?c=index&a=quitGroup",
+      url: "/index.php?c=groupApi&a=quitGroup",
       dataType: "json", //表示返回值类型，不必须
       data:{
         groupId : groupId

@@ -10,7 +10,7 @@ class Controller
     public $openId;
 
     function __construct(){
-        $this->openId = '3';
+        $this->openId = '00000002';
         $user = $this->M('User');
         $user->createUser($this->openId);
     }

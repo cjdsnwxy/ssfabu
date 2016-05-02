@@ -93,14 +93,14 @@
     </div>
     <p class="weui_btn_area">
       <button id="quitGroupBtn" onclick="quitGroup()" class="weui_btn weui_btn_warn" >退出</button>
-      <button id="updateGroupBtn" onclick="showSendMsgPage()" class="weui_btn weui_btn_primary" >发送消息</button>
-      <button id="updateGroupBtn" onclick="showMemberPage()" class="weui_btn weui_btn_primary" >查看成员</button>
-      <button id="updateGroupBtn" onclick="showHistoryMsgPage()" class="weui_btn weui_btn_primary" >查看历史消息</button>
+      <button id="sendMsgBtn" onclick="showSendMsgPage()" class="weui_btn weui_btn_primary" >发送消息</button>
+      <button id="showMemberBtn" onclick="showMemberPage()" class="weui_btn weui_btn_primary" >查看成员</button>
+      <button id="showHisMsgBtn" onclick="showHistoryMsgPage()" class="weui_btn weui_btn_primary" >查看历史消息</button>
       <button id="updateGroupBtn" onclick="showUpdateGroupPage()" class="weui_btn weui_btn_primary" >修改群组信息</button>
       <button id="DropGroupBtn" onclick="dropGroup()" class="weui_btn weui_btn_warn" >解散群组</button>
+      <button id="updateNameBtn" onclick="updateName()" class="weui_btn weui_btn_primary">修改姓名</button>
       <button id="blackBtn" class="weui_btn weui_btn_primary" style="display: none;">返回列表</button>
       <button id="joinBtn" onclick="joinGroup()" class="weui_btn weui_btn_primary">加入</button>
-      <button id="updateNameBtn" onclick="updateName()" class="weui_btn weui_btn_primary">修改姓名</button>
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>
@@ -246,6 +246,21 @@
     <p class="weui_btn_area">
       <button onclick="sendMsg()" class="weui_btn weui_btn_primary">发送</button>
       <button onclick="showMyCreatePage()" class="weui_btn weui_btn_default">返回列表</button>
+      <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
+    </p>
+  </div>
+</div>
+<div id="memberPage" style="display: none;" class="weui_msg">
+  <div class="weui_text_area">
+    <h1 id="groupNameInMemberPage" class="weui_msg_title"></h1>
+  </div>
+  <div class="weui_opr_area">
+    <div id="memberList" class="weui_cells weui_cells_access">
+
+    </div>
+  </div>
+  <div class="weui_opr_area">
+    <p class="weui_btn_area">
       <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
     </p>
   </div>
