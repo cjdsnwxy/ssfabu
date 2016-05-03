@@ -4,9 +4,8 @@
  * @author 王晓阳 <[cjdsnwxy@gmail.com]>
  * 2015-12-03
  *
- * 引导用户打开网页授权网页，post获得code
- * new openId($appId,$appSecret,$code);
- *
+ * 引导用户打开网页授权网页，get获得code
+ * new wxClass($appId,$appSecret,$code);
  */
 class wxClass{
     private $appId;
@@ -19,8 +18,7 @@ class wxClass{
     }
     public function getOpenId(){
         $res = $this->getToken();
-        $openId = $res->openid;
-        return $openId;
+        return $res->openid;
     }
     private function getToken(){
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->appId."&secret=".$this->appSecret."&code=".$this->code."&grant_type=authorization_code";

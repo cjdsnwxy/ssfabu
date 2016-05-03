@@ -10,9 +10,8 @@ class redisClass
     private $redis;
 
     function __construct(){
-        $conf = include 'conf.php';
         $redis = new Redis();
-        $redis->connect($conf['redis']['host'],$conf['redis']['port']);
+        $redis->connect(REDIS_HOST,REDIS_PORT);
         $this->redis = $redis;
     }
 

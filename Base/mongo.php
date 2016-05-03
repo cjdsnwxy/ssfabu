@@ -12,9 +12,8 @@ class mongoClass
 
     function __construct()
     {
-        $conf = include 'conf.php';
-        //$mongodb = new MongoClient("mongodb://".$conf['mongo']['username'].":".$conf['mongo']['pwd']."@".$conf['mongo']['host'].":".$conf['mongo']['port']);
-        $mongodb = new MongoClient();
-        $this->mongo = $mongodb->selectDB($conf['mongo']['dbName']);
+        $mongodb = new MongoClient("mongodb://".MONGO_USERNAME.":".MONGO_PWD."@".MONGO_HOST.":".MONGO_PORT);
+        //$mongodb = new MongoClient();
+        $this->mongo = $mongodb->selectDB(MONGO_DBNAME);
     }
 }
