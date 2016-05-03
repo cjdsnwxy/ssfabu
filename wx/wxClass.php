@@ -23,7 +23,7 @@ class wxClass{
         return $openId;
     }
     private function getToken(){
-        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->appId."&secret=".$this->appSecret."&code=".$this->code.".&grant_type=authorization_code";
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->appId."&secret=".$this->appSecret."&code=".$this->code."&grant_type=authorization_code";
         return json_decode($this->httpGet($url));
     }
     private function httpGet($url){
