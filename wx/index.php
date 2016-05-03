@@ -1,5 +1,5 @@
 <?php
-$code = $_POST['code'];
+$code = $_GET['code'];
 echo "code->".$code;
 echo "<br>";
 include 'wxClass.php';
