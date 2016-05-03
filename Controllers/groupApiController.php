@@ -119,20 +119,35 @@ class groupApiController extends Controller
     public function actionQuitGroup(){
         $groupId = $_POST['groupId'];
         $user = $this->M('User');
-        $res = $user->quitGroup($this->openId,$groupId);
-        if($res == false){
-            $this->renderErr('您不再此群中');
-        }else{
-            $group = $this->M('Group');
-            $group->quitGroup($groupId,$this->openId);
-        }
+        $user->quitGroup($this->openId,$groupId);
+        $group = $this->M('Group');
+        $group->quitGroup($groupId,$this->openId);
         $this->renderAjax();
     }
 
+    //ajax获取群组成员列表
     public function actionGetMemberList(){
         $groupId = $_POST['groupId'];
         $group = $this->M('Group');
-        $memberList = $group->getMember($groupId);
-        var_dump($memberList);
+        if($group->checkIsCreate($groupId,$this->openId)){
+            $list = $group->getMember($groupId);
+            $this->renderAjax($list);
+        }else{
+            $this->renderErr('您没有权限');
+        }
+    }
+
+    //ajax修改名字
+    public function actionUpdateName(){
+        $groupId = $_POST['groupId'];
+        $newName = $_POST['newName'];
+        $group = $this->M('Group');
+        if($group->checkInGroup($groupId,$this->openId)){
+            $list = $group->updateName($groupId,$this->openId,$newName);
+            $this->renderAjax($list);
+        }else{
+            $this->renderErr('您没有权限');
+        }
     }
 }
+

@@ -33,13 +33,26 @@ class messageApiController extends Controller
         }
     }
 
-    //获得收到信息列表
-    public function actionReceiveMsgList(){
-
+    //获得发送的信息列表
+    public function actionGetMsgList(){
+        $groupId = $_POST['groupId'];
+        $group = $this->M('Group');
+        if($group->checkIsCreate($groupId,$this->openId)){
+            $msg = $this->M('Message');
+            $list = $msg->getMsgList($groupId);
+            $this->renderAjax($list);
+        }else{
+            $this->renderErr('没有权限');
+        }
     }
 
-    //获得发送的信息列表
-    public function actionSendMsgList(){
-
+    //获得消息详情
+    public function actionGetMsgInfo(){
+        $msgId = $_POST['msgId'];
+        $message = $this->M('Message');
+        $msgInfo = $message->getMsgInfo($msgId);
+        if(!empty($msgInfo)){
+            $this->renderAjax($msgInfo);
+        }
     }
 }

@@ -265,3 +265,79 @@
     </p>
   </div>
 </div>
+<div id="historyMsgPage" style="display: none;" class="weui_msg">
+  <div class="weui_text_area">
+    <h1 id="groupNameInHisMsgPage" class="weui_msg_title"></h1>
+  </div>
+  <div class="weui_opr_area">
+    <div id="HisMsgList" class="weui_cells weui_cells_access">
+
+    </div>
+  </div>
+  <div class="weui_opr_area">
+    <p class="weui_btn_area">
+      <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
+    </p>
+  </div>
+</div>
+<div id="msgInfoPage" style="display: none;" class="weui_msg">
+  <div class="weui_text_area">
+    <h1 class="weui_msg_title">消息详情</h1>
+  </div>
+  <div class="weui_opr_area">
+    <div class="weui_cells">
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>群组ID</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="groupIdInMsgInfoPage"></p>
+        </div>
+      </div>
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>消息标题</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="titleInMsgInfoPage"></p>
+        </div>
+      </div>
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>开始时间</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="startTimeInMsgInfoPage"></p>
+        </div>
+      </div>
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>地点</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="addressInMsgInfoPage"></p>
+        </div>
+      </div>
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>详情描述</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="introInMsgInfoPage"></p>
+        </div>
+      </div>
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          <p>发送时间</p>
+        </div>
+        <div class="weui_cell_ft weui_cell_primary" >
+          <p id="createTimeInMsgInfoPage"></p>
+        </div>
+      </div>
+    </div>
+    <p class="weui_btn_area">
+      <button id="blackBtnInMsgInfoPage" class="weui_btn weui_btn_primary">返回列表</button>
+      <button onclick="showIndexPage()" class="weui_btn weui_btn_default">返回首页</button>
+    </p>
+  </div>
+</div>

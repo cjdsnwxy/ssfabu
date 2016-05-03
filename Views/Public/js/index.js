@@ -175,10 +175,11 @@ function showMemberPage() {
         var memberList = "";
         $.each(j.obj,function(n,value) {
           var list = "";
-          list += "<a class='weui_cell'\"><div class='weui_cell_bd weui_cell_primary'><p align='left'>" + value.memberName +"</p></div></a>"
+          list += "<a class='weui_cell'\"><div class='weui_cell_bd weui_cell_primary'><p align='left'>" + value.name +"</p></div></a>"
           memberList+=list;
         });
         $.hideLoading();
+        $(".weui_msg").hide();
         $("#memberList").children().remove();
         $("#memberList").append(memberList);
         $("#memberPage").show();
@@ -188,7 +189,68 @@ function showMemberPage() {
       }
     }
   });
-
+}
+function showHistoryMsgPage(groupId) {
+  $.showLoading();
+  if(!groupId){
+    groupId = $("#groupIdInGroupInfoPage").text();
+  }
+  $.ajax({
+    type: "POST",
+    url: "/index.php?c=messageApi&a=getMsgList",
+    dataType: "json", //表示返回值类型，不必须
+    data:{
+      groupId:groupId
+    },
+    success: function (j) {
+      if(j.ok == 0){
+        var msgList = "";
+        $.each(j.obj,function(n,value) {
+          var list = "";
+          list += "<a class='weui_cell' onclick=\"showMsgInfoPage('"+ value.msgId +"')\"><div class='weui_cell_bd weui_cell_primary'><p align='left'>" + value.title +"</p></div></a>"
+          msgList+=list;
+        });
+        $.hideLoading();
+        $(".weui_msg").hide();
+        $("#HisMsgList").children().remove();
+        $("#HisMsgList").append(msgList);
+        $("#historyMsgPage").show();
+      }else if(j.error == 0){
+        $.hideLoading();
+        $.alert(j.msg, "警告");
+      }
+    }
+  });
+}
+function showMsgInfoPage(msgId) {
+  $.showLoading();
+  $.ajax({
+    type: "POST",
+    url: "/index.php?c=messageApi&a=getMsgInfo",
+    dataType: "json", //表示返回值类型，不必须
+    data:{
+      msgId:msgId
+    },
+    success: function (j) {
+      if(j.ok == 0){
+        $.hideLoading();
+        $("#groupIdInMsgInfoPage").text(j.obj.groupId);
+        $("#titleInMsgInfoPage").text(j.obj.title);
+        $("#startTimeInMsgInfoPage").text(j.obj.startTime);
+        $("#addressInMsgInfoPage").text(j.obj.address);
+        $("#introInMsgInfoPage").text(j.obj.intro);
+        $("#createTimeInMsgInfoPage").text(j.obj.createTime);
+        $("#blackBtnInMsgInfoPage").removeAttr("onclick");
+        $("#blackBtnInMsgInfoPage").attr("onclick","blackHistoryMsgPage();");
+        $(".weui_msg").hide();
+        $("#msgInfoPage").show();
+      }
+    }
+  });
+}
+function blackHistoryMsgPage() {
+  $(".weui_msg").hide();
+  $("#historyMsgPage").show();
 }
 function joinGroup(){
   $.prompt("","请输入你的名字", function(text) {
@@ -392,4 +454,33 @@ function sendMsg() {
     }
   });
 }
-
+function updateName() {
+  $.prompt("","请输入新的名字", function(text) {
+    var groupId = $("#groupIdInGroupInfoPage").text();
+    if(text == null){
+      $.toast("请输入名字", "forbidden");
+      return;
+    }
+    $.showLoading();
+    $.ajax({
+      type: "POST",
+      url: "/index.php?c=groupApi&a=updateName",
+      dataType: "json", //表示返回值类型，不必须
+      data:{
+        groupId : groupId,
+        newName : text
+      },
+      success: function (j) {
+        if(j.ok == 0){
+          $.hideLoading();
+          $.toast("修改成功");
+        }else{
+          $.hideLoading();
+          $.toast("修改失败", "forbidden");
+        }
+      }
+    });
+  }, function() {
+    showJoinGroupPage();
+  });
+}

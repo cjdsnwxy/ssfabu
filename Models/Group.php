@@ -48,7 +48,15 @@ class Group extends Model
     }
 
     public function getMember($groupId){
-        return $this->collection->findOne(array("_id" => $groupId),array("member"));
+        $memberList = $this->collection->findOne(array("_id" => $groupId),array("member"));
+        $list = array();
+        foreach ($memberList['member'] as $name) {
+            $arr = array(
+                'name' => $name
+            );
+            $list = array_merge_recursive($list,array($arr));
+        }
+        return $list;
 
     }
     
@@ -80,14 +88,14 @@ class Group extends Model
             }
         }
         catch (MongoCursorException $e) {
-
+            return false;
         }
     }
 
     public function checkInGroup($groupId,$openId){
         try {
             $res = $this->collection->findOne(array('_id' => $groupId),array("member.$openId"));
-            if(isset($res["member"])){
+            if($res["member"]){
                 return true;
             }else{
                 return false;
@@ -125,7 +133,21 @@ class Group extends Model
         try {
             $this->collection->update(
                 array('_id'=>$groupId),
-                array('$pull'=>array('member'=>$openId)),
+                array('$unset'=>array("member.$openId"=>-1),'$inc'=>array('groupNum'=>-1)),
+                array('w'=>true)
+            );
+            return true;
+        }
+        catch (MongoCursorException $e) {
+            return false;
+        }
+    }
+
+    public function updateName($groupId,$openId,$newName){
+        try {
+            $this->collection->update(
+                array('_id'=>$groupId),
+                array('$set'=>array("member.$openId" =>$newName)),
                 array('w'=>true)
             );
             return true;

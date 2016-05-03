@@ -19,7 +19,7 @@ class Message extends Model
             "title" => $title,
             "startTime" => $startTime,
             "address" => $address,
-            "groupIntro" => $intro,
+            "intro" => $intro,
             "createTime" =>  date('Y-m-d H:i:s',time())
         );
         $options = array('w'=>true);
@@ -30,5 +30,22 @@ class Message extends Model
         catch (MongoCursorException $e) {
             return false;
         }
+    }
+
+    public function getMsgList($groupId){
+        $msgList = $this->collection->find(array('groupId' => $groupId),array("title"));
+        $list = array();
+        foreach ($msgList as $value) {
+            $arr = array(
+                'msgId' => $value['_id'],
+                'title' => $value['title']
+            );
+            $list = array_merge_recursive($list,array($arr));
+        }
+        return $list;
+    }
+
+    public function getMsgInfo($msgId){
+        return $this->collection->findOne(array('_id' => $msgId));
     }
 }
