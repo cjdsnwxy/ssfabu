@@ -28,6 +28,7 @@ class messageApiController extends Controller
             $msg = $this->M('Message');
             $msgId = $msg->createMsg($groupId,$title,$startTime,$address,$intro);
             if($msgId){
+                $this->renderAjax();
                 //根据groupId获得群组信息
                 $group = $this->M('Group');
                 $list = $group->getMemberListWithGroupName($groupId);
@@ -65,7 +66,6 @@ class messageApiController extends Controller
                     );
                     $res = $templateClass->sendTemMsg(urldecode(json_encode($template)),$access_token);
                 }
-                $this->renderAjax();
             }else{
                 $this->renderErr('发送失败');
             }
