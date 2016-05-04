@@ -57,9 +57,14 @@ class Group extends Model
             $list = array_merge_recursive($list,array($arr));
         }
         return $list;
+    }
+
+    public function getMemberListWithOpenId($groupId){
+        return $this->collection->findOne(array("_id" => $groupId),array("member"));
+
 
     }
-    
+
     public function findGroupInfo($groupId){
         return $this->collection->findOne(array("_id" => $groupId));
     }

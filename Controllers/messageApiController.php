@@ -18,12 +18,41 @@ class messageApiController extends Controller
             $title = $_POST['title'];
             $startTime = $_POST['startTime'];
             $address = $_POST['address'];
-           if(empty($_POST['intro'])){
-               $intro = '无';
-           }else{
-               $intro = $_POST['intro'];
-           }
-            include include $_SERVER['DOCUMENT_ROOT'].'/Ext/.php';
+            if(empty($_POST['intro'])){
+                $intro = '无';
+            }else{
+                $intro = $_POST['intro'];
+            }
+            //根据groupId获得群组信息
+            $group = $this->M('Group');
+            $memberList = $group->getMemberListWithOpenId($groupId);
+
+            //引入templateClass
+            include $_SERVER['DOCUMENT_ROOT'].'/Ext/templateMsgClass.php';
+            $templateClass = new templateMsgClass(APPID,APPSECRET);
+
+            //获取access_token
+            $redis = $this->redis();
+            $access_token = $redis->redisGet('access_token');
+
+            //对每个人发送模板消息
+            foreach ($memberList as $openId => $name){
+                //组装模板消息
+                $template = array(
+                    'touser' => $openId,
+                    'template_id' => 'CulNPdLGBCA80vRZLrQwGJkb_6HkpM_DhXGRNCjruQ4',
+                    'url' => 'http://www.baidu.com',
+                    'data' => array(
+                        'first' => array('value' => $name.',您好,您有一条通知','color' => '#173177'),
+                        'Title' => array('value' => urlencode($title),'color' => '#173177'),
+                        'Time' => array('value' => urlencode($startTime),'color' => '#173177'),
+                        'Address' => array('value' => urlencode($address),'color' => '#173177'),
+                        'remark' => array('value' => '请务必点击查看详情！','color' => '#173177')
+                    ),
+                );
+            }
+
+
             $msg = $this->M('Message');
             $msgId = $msg->createMsg($groupId,$title,$startTime,$address,$intro);
             if($msgId){
