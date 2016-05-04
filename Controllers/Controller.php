@@ -13,7 +13,9 @@ class Controller
         include $_SERVER['DOCUMENT_ROOT'].'/Base/conf.php';
         include $_SERVER['DOCUMENT_ROOT'].'/Ext/getAccessTokenClass.php';
         $class = new getAccessTokenClass(APPID,APPSECRET);
-        $access_token = $class->getToken();die;
+        $access_token = $class->getToken();
+        var_dump($access_token);
+        die;
 
 //        $this->openId = '00000002';
 //        $user = $this->M('User');

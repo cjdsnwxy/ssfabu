@@ -16,7 +16,7 @@ class getAccessTokenClass{
 
     public function getToken(){
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$this->appId."&secret=".$this->appSecret;
-        return json_decode($this->httpGet($url))->access_token;
+        return json_decode($this->httpGet($url));
     }
 
     private function httpGet($url){
