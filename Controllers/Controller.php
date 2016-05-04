@@ -11,10 +11,7 @@ class Controller
 
     function __construct(){
         include $_SERVER['DOCUMENT_ROOT'].'/Base/conf.php';
-        include $_SERVER['DOCUMENT_ROOT'].'/Ext/getAccessTokenClass.php';
-        $class = new getAccessTokenClass(APPID,APPSECRET);
-        $access_token = $class->getToken();
-        var_dump($access_token);
+        
         die;
 
 //        $this->openId = '00000002';

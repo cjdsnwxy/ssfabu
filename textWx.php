@@ -8,5 +8,5 @@
 
 include 'Ext/getAccessTokenClass.php';
 $class = new getAccessTokenClass('wxa54b997e82462e5a','2b9c188883ebf39f9203eaee4876dda5');
-$a = $class->getToken();
+$a = $class->getToken()->access_token;
 var_dump($a);
