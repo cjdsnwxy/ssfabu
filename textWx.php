@@ -11,11 +11,10 @@ $class = new templateMsgClass('wxa54b997e82462e5a','2b9c188883ebf39f9203eaee4876
 
 $redis = new Redis();
 $redis->connect('127.0.0.1', 6379);
-if($redis->exists('access_token')){
+if($redis->get('access_token')){
     $access_token = $redis->get('access_token');
 }else{
     $access_token = $class->getToken();
-    var_dump($access_token);die;
     $redis->set('access_token',$access_token,20);
 }
 $template = array(
