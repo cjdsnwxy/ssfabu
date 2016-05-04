@@ -14,8 +14,8 @@ $redis->connect('127.0.0.1', 6379);
 if($redis->exists('access_token')){
     $access_token = $redis->get('access_token');
 }else{
-    $access_token = $class->getToken()->access_token;
-    $redis->set('access_token',$access_token);
+    $access_token = $class->getToken();
+    $redis->set('access_token',$access_token,20);
 }
 $template = array(
     'touser' => 'oSH9atxDieo_DmXkuFhpsX9eoJRY',
