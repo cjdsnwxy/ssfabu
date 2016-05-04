@@ -11,9 +11,13 @@ class Controller
 
     function __construct(){
         include $_SERVER['DOCUMENT_ROOT'].'/Base/conf.php';
-        $this->openId = '00000001';
-        $user = $this->M('User');
-        $user->createUser($this->openId);
+        include $_SERVER['DOCUMENT_ROOT'].'/Ext/getAccessTokenClass.php';
+        $class = new getAccessTokenClass(APPID,APPSECRET);
+        $access_token = $class->getToken();die;
+
+//        $this->openId = '00000002';
+//        $user = $this->M('User');
+//        $user->createUser($this->openId);
 
 
 //        session_start();

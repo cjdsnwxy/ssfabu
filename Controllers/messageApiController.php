@@ -23,6 +23,7 @@ class messageApiController extends Controller
            }else{
                $intro = $_POST['intro'];
            }
+            include include $_SERVER['DOCUMENT_ROOT'].'/Ext/.php';
             $msg = $this->M('Message');
             $msgId = $msg->createMsg($groupId,$title,$startTime,$address,$intro);
             if($msgId){
