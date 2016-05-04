@@ -15,8 +15,8 @@ class redisClass
         $this->redis = $redis;
     }
 
-    public function redisSet($key,$value){
-       return $this->redis->set($key,$value);
+    public function redisSet($key,$value,$timeout){
+       return $this->redis->set($key,$value,$timeout);
     }
 
     public function redisGet($key){

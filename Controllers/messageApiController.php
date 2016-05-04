@@ -23,46 +23,55 @@ class messageApiController extends Controller
             }else{
                 $intro = $_POST['intro'];
             }
-            //根据groupId获得群组信息
-            $group = $this->M('Group');
-            $memberList = $group->getMemberListWithOpenId($groupId);
 
-            //引入templateClass
-            include $_SERVER['DOCUMENT_ROOT'].'/Ext/templateMsgClass.php';
-            $templateClass = new templateMsgClass(APPID,APPSECRET);
-
-            //获取access_token
-            $redis = $this->redis();
-            $access_token = $redis->redisGet('access_token');
-
-            //对每个人发送模板消息
-            foreach ($memberList as $openId => $name){
-                //组装模板消息
-                $template = array(
-                    'touser' => $openId,
-                    'template_id' => 'CulNPdLGBCA80vRZLrQwGJkb_6HkpM_DhXGRNCjruQ4',
-                    'url' => 'http://www.baidu.com',
-                    'data' => array(
-                        'first' => array('value' => $name.',您好,您有一条通知','color' => '#173177'),
-                        'Title' => array('value' => urlencode($title),'color' => '#173177'),
-                        'Time' => array('value' => urlencode($startTime),'color' => '#173177'),
-                        'Address' => array('value' => urlencode($address),'color' => '#173177'),
-                        'remark' => array('value' => '请务必点击查看详情！','color' => '#173177')
-                    ),
-                );
-            }
-
-
+            //保存消息
             $msg = $this->M('Message');
             $msgId = $msg->createMsg($groupId,$title,$startTime,$address,$intro);
             if($msgId){
+                //根据groupId获得群组信息
+                $group = $this->M('Group');
+                $list = $group->getMemberListWithGroupName($groupId);
+                $memberList = $list['member'];
+                $groupName = $list['groupName'];
+
+                //引入templateClass
+                include $_SERVER['DOCUMENT_ROOT'].'/Ext/templateMsgClass.php';
+                $templateClass = new templateMsgClass(APPID,APPSECRET);
+
+                //获取access_token
+                $redis = $this->redis();
+                if($redis->redisGet('access_token')){
+                    $access_token = $redis->redisGet('access_token');
+                }else{
+                    $access_token = $templateClass->getToken();
+                    $redis->redisSet('access_token',$access_token,7000);
+                }
+
+                //对每个人发送模板消息
+                foreach ($memberList as $openId => $name){
+                    //组装模板消息
+                    $template = array(
+                        'touser' => $openId,
+                        'template_id' => '9nDUG73NbtCSo3Vtx0og8eEJaCXU0PcmGSjZiGhwY-k',
+                        'url' => 'http://115.159.186.166/index.php?a=messageApi&c=showMsgInfo&msgId='.$msgId,
+                        'data' => array(
+                            'first' => array('value' => urlencode($name).',您好,您有一条通知!','color' => '#173177'),
+                            'From' => array('value' => urlencode($groupName),'color' => '#173177'),
+                            'Title' => array('value' => urlencode($title),'color' => '#173177'),
+                            'Time' => array('value' => urlencode($startTime),'color' => '#173177'),
+                            'Address' => array('value' => urlencode($address),'color' => '#173177'),
+                            'remark' => array('value' => '请务必点击查看详情！','color' => '#173177')
+                        ),
+                    );
+                    $res = $templateClass->sendTemMsg(urldecode(json_encode($template)),$access_token);
+                }
                 $this->renderAjax();
             }else{
-                $this->renderErr('发送失败请重试');
+                $this->renderErr('发送失败');
             }
+
         }
     }
-
     //获得发送的信息列表
     public function actionGetMsgList(){
         $groupId = $_POST['groupId'];

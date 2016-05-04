@@ -18,7 +18,7 @@ class userApiController extends Controller
             return;
         }
         $group = $this->M('Group');
-        $list = $group->getGroupNameById($groupList['joinGroup']);
+        $list = $group->getGroupNameByIdList($groupList['joinGroup']);
         if(empty($list))
         {
             $this->renderErr('没有加入过群组');
@@ -37,7 +37,7 @@ class userApiController extends Controller
             return;
         }
         $group = $this->M('Group');
-        $list = $group->getGroupNameById($groupList['createGroup']);
+        $list = $group->getGroupNameByIdList($groupList['createGroup']);
         $this->renderAjax($list);
     }
 }

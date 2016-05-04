@@ -21,7 +21,7 @@ class templateMsgClass{
 
     public function sendTemMsg($template,$access_token){
         $url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$access_token;
-        return $this->httpsPost($url,$template);
+        return json_decode($this->httpsPost($url,$template));
     }
 
     private function httpsPost($url,$data){

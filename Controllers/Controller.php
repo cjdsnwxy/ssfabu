@@ -12,11 +12,10 @@ class Controller
     function __construct(){
         include $_SERVER['DOCUMENT_ROOT'].'/Base/conf.php';
         
-        die;
 
-//        $this->openId = '00000002';
-//        $user = $this->M('User');
-//        $user->createUser($this->openId);
+        $this->openId = '00000001';
+        $user = $this->M('User');
+        $user->createUser($this->openId);
 
 
 //        session_start();

@@ -19,7 +19,7 @@ if($redis->get('access_token')){
 }
 $template = array(
     'touser' => 'oSH9atxDieo_DmXkuFhpsX9eoJRY',
-    'template_id' => 'CulNPdLGBCA80vRZLrQwGJkb_6HkpM_DhXGRNCjruQ4',
+    'template_id' => '9nDUG73NbtCSo3Vtx0og8eEJaCXU0PcmGSjZiGhwY-k',
     'url' => 'http://www.baidu.com',
     'data' => array(
         'first' => array('value' => ',您好,您有一条通知','color' => '#173177'),

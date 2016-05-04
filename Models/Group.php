@@ -32,7 +32,7 @@ class Group extends Model
         }
     }
 
-    public function getGroupNameById($groupIdList){
+    public function getGroupNameByIdList($groupIdList){
         $res = $this->collection->find(array(
             "_id" => array('$in' => $groupIdList)
         ));
@@ -59,10 +59,12 @@ class Group extends Model
         return $list;
     }
 
-    public function getMemberListWithOpenId($groupId){
-        return $this->collection->findOne(array("_id" => $groupId),array("member"));
+    public function getGroupNameById($groupId){
+        return $this->collection->findOne(array("_id" => $groupId),array('groupName'));
+    }
 
-
+    public function getMemberListWithGroupName($groupId){
+        return $this->collection->findOne(array("_id" => $groupId),array("member","groupName"));
     }
 
     public function findGroupInfo($groupId){
@@ -100,7 +102,7 @@ class Group extends Model
     public function checkInGroup($groupId,$openId){
         try {
             $res = $this->collection->findOne(array('_id' => $groupId),array("member.$openId"));
-            if($res["member"]){
+            if(!empty($res["member"])){
                 return true;
             }else{
                 return false;
