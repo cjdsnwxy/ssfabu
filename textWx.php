@@ -15,7 +15,7 @@ if($redis->exists('access_token')){
     $access_token = $redis->get('access_token');
 }else{
     $access_token = $class->getToken()->access_token;
-    $redis->set('access_token',$access_token,20);
+    $redis->set('access_token',$access_token);
 }
 $template = array(
     'touser' => 'oSH9atxDieo_DmXkuFhpsX9eoJRY',
