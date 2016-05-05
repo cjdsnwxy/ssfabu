@@ -15,7 +15,8 @@ if($redis->get('access_token')){
     $access_token = $redis->get('access_token');
 }else{
     $access_token = $class->getToken();
-    $redis->set('access_token',$access_token,20);
+    $redis->set('access_token',$access_token);
+    $redis->expire('access_token',3000);
 }
 //$template = array(
 //    'touser' => 'oSH9atxDieo_DmXkuFhpsX9eoJRY',
