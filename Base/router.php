@@ -32,7 +32,6 @@ if(@!include $path){
 }
 //默认控制器和方法
 function defaultIndex(){
-    include $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
     $con = new indexController();
     $con->actionIndex();
 }
