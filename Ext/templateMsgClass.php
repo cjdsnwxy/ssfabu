@@ -25,8 +25,12 @@ class templateMsgClass{
     }
 
     public function getShortLinK($loonLink,$access_token){
+        $data = array(
+            'action' => 'long2short',
+            'long_url' => $loonLink
+        );
         $url = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=".$access_token;
-        return $this->httpsPost($url,urldecode(json_encode($loonLink)));
+        return $this->httpsPost($url,urldecode(json_encode($data)));
     }
 
     private function httpsPost($url,$data){
