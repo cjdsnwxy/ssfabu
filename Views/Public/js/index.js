@@ -443,11 +443,10 @@ function sendMsg() {
       intro : intro
     },
     success: function (j) {
+      $.hideLoading();
       if(j.ok == 0){
-        $.hideLoading();
         $.toast("发送成功");
       }else{
-        $.hideLoading();
         $.toast(j.msg, "forbidden");
       }
     }

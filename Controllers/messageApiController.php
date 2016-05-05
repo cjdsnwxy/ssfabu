@@ -47,10 +47,9 @@ class messageApiController extends Controller
                     $access_token = $weChatClass->getToken();
                     $redis->redisSet('access_token',$access_token,7000);
                 }
-
+                
                 //对每个人发送模板消息
                 foreach ($memberList as $openId => $name){
-
                     //获取短链接
                     $loonLink = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php?a=messageApi&c=showMsgInfo&msgId=".$msgId."&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
                     $shortUrl = $weChatClass->getShortLinK($loonLink,$access_token)->short_url;
@@ -97,6 +96,16 @@ class messageApiController extends Controller
         $msgInfo = $message->getMsgInfo($msgId);
         if(!empty($msgInfo)){
             $this->renderAjax($msgInfo);
+        }
+    }
+
+    public function demo(){
+        $group = $this->M('Group');
+        $list = $group->getMemberListWithGroupName('00000002');
+        $memberList = $list['member'];
+        foreach ($memberList as $openId => $name ){
+            echo 'openId:'.$openId."<br>"."name:".$name;
+            echo "<br>";
         }
     }
 }
