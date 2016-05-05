@@ -445,7 +445,6 @@ function sendMsg() {
     success: function (j) {
       if(j.ok == 0){
         $.hideLoading();
-        showGroupInfoPageByMyCreatePage(groupId);
         $.toast("发送成功");
       }else{
         $.hideLoading();
