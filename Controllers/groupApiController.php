@@ -39,6 +39,7 @@ class groupApiController extends Controller
         $obj = array(
             'groupId' => $groupId,
         );
+        $this->logSave('createGroup',$groupId);
         $this->renderAjax($obj);
     }
 
@@ -90,6 +91,7 @@ class groupApiController extends Controller
         $group = $this->M('Group');
         if($group->checkIsCreate($groupId,$this->openId)){
             $group->updateGroup($groupId,$groupName,$intro);
+            $this->logSave('updateGroup',$groupId);
             $this->renderAjax();
         }else{
             $this->renderErr('您没有权限');
@@ -106,6 +108,7 @@ class groupApiController extends Controller
             $group = $this->M('Group');
             $rew = $group->dropGroup($groupId);
             if($res && $rew){
+                $this->logSave('dropGroup',$groupId);
                 $this->renderAjax();
             }else{
                 $this->renderErr('操作失败');

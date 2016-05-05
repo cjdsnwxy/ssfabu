@@ -20,5 +20,15 @@ class indexController extends Controller
         QRcode::png('http://www.baidu.com/');
         //http://127.0.0.1/index.php?c=index&a=qrcode
     }
-    
+
+    public function actionShowMsg(){
+        if(empty($_GET['msgId'])){
+            $this->display('Index/index');
+        }else{
+            $msgId = $_GET['msgId'];
+            $msg = $this->M('Message');
+            $msgInfo = $msg->getMsgInfo($msgId);
+            $this->display('Index/message',$msgInfo);
+        }
+    }
 }

@@ -13,6 +13,7 @@ class messageApiController extends Controller
     public function actionSendMsg(){
         if(empty($_POST['groupId']) || empty($_POST['title']) || empty($_POST['startTime']) || empty($_POST['address'])){
             $this->renderErr('信息不得为空');
+            die;
         }else{
             $groupId = $_POST['groupId'];
             $title = $_POST['title'];
@@ -28,7 +29,6 @@ class messageApiController extends Controller
             $msg = $this->M('Message');
             $msgId = $msg->createMsg($groupId,$title,$startTime,$address,$intro);
             if($msgId){
-                $this->renderAjax();
                 //根据groupId获得群组信息
                 $group = $this->M('Group');
                 $list = $group->getMemberListWithGroupName($groupId);
@@ -65,11 +65,12 @@ class messageApiController extends Controller
                         ),
                     );
                     $res = $templateClass->sendTemMsg(urldecode(json_encode($template)),$access_token);
+                    $this->logSave('sendTemplate',$res);
                 }
+                $this->renderAjax();
             }else{
                 $this->renderErr('发送失败');
             }
-
         }
     }
     //获得发送的信息列表

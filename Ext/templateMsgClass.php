@@ -24,6 +24,11 @@ class templateMsgClass{
         return json_decode($this->httpsPost($url,$template));
     }
 
+    public function getShortLinK($loonLink,$access_token){
+        $url = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=".$access_token;
+        return $this->httpsPost($url,urldecode(json_encode($loonLink)));
+    }
+
     private function httpsPost($url,$data){
         $curl = curl_init(); // 启动一个CURL会话
         curl_setopt($curl, CURLOPT_URL, $url); // 要访问的地址

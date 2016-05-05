@@ -73,6 +73,11 @@ class Controller
         echo $content;       // 返回文本，此处也可以字节echo出来，并结束代码。
     }
 
+    public function logSave($type,$logData){
+        $log = $this->M('Log');
+        return $log->saveLog($type,$logData,$this->openId);
+    }
+
     //ajax返回JSON数据
     public function renderAjax($obj = null){
         $json = [
