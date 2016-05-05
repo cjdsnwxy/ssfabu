@@ -19,12 +19,11 @@ $path = $_SERVER['DOCUMENT_ROOT'].'/Controllers/'.$c_name.'.php';
 
 //判断合法性
 if(@!include $path){
-    include_once $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
     defaultIndex();
 }else{
     $con = new $c_name();
 
-    if(method_exists($con,$a_name) == false){
+    if(false == method_exists($con,$a_name)){
         defaultIndex();
     }else{
         $con->$a_name();
@@ -32,7 +31,7 @@ if(@!include $path){
 }
 //默认控制器和方法
 function defaultIndex(){
-    include_once $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
     $con = new indexController();
     $con->actionIndex();
 }
