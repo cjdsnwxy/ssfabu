@@ -99,13 +99,4 @@ class messageApiController extends Controller
         }
     }
 
-    public function actionIndex(){
-        $group = $this->M('Group');
-        $list = $group->getMemberListWithGroupName('00000002');
-        $memberList = $list['member'];
-        foreach ($memberList as $openId => $name ){
-            echo 'openId:'.$openId."<br>"."name:".$name;
-            echo "<br>";
-        }
-    }
 }

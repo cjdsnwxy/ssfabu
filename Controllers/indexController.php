@@ -22,6 +22,7 @@ class indexController extends Controller
     }
 
     public function actionShowMsg(){
+        echo 'sss';
         if(empty($_GET['msgId'])){
             $this->display('Index/index');
         }else{
