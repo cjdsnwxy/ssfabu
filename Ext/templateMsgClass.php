@@ -30,7 +30,7 @@ class templateMsgClass{
             'long_url' => $loonLink
         );
         $url = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=".$access_token;
-        return urldecode($this->httpsPost($url,json_encode($data)));
+        return json_decode($this->httpsPost($url,json_encode($data)));
     }
 
     private function httpsPost($url,$data){
