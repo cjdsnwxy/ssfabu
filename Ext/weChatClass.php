@@ -5,7 +5,7 @@
  * 2016-05-04
  *
  */
-class templateMsgClass{
+class weChatClass{
     private $appId;
     private $appSecret;
 
@@ -21,7 +21,7 @@ class templateMsgClass{
 
     public function sendTemMsg($template,$access_token){
         $url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$access_token;
-        return json_decode($this->httpsPost($url,$template));
+        return json_decode($this->httpsPost($url,urldecode(json_encode($template))),true);
     }
 
     public function getShortLinK($loonLink,$access_token){

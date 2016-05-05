@@ -35,26 +35,30 @@ class messageApiController extends Controller
                 $memberList = $list['member'];
                 $groupName = $list['groupName'];
 
-                //引入templateClass
-                include $_SERVER['DOCUMENT_ROOT'].'/Ext/templateMsgClass.php';
-                $templateClass = new templateMsgClass(APPID,APPSECRET);
+                //引入weChatClass
+                include $_SERVER['DOCUMENT_ROOT'] . '/Ext/weChatClass.php';
+                $weChatClass = new weChatClass(APPID,APPSECRET);
 
                 //获取access_token
                 $redis = $this->redis();
                 if($redis->redisGet('access_token')){
                     $access_token = $redis->redisGet('access_token');
                 }else{
-                    $access_token = $templateClass->getToken();
+                    $access_token = $weChatClass->getToken();
                     $redis->redisSet('access_token',$access_token,7000);
                 }
 
                 //对每个人发送模板消息
                 foreach ($memberList as $openId => $name){
+
+                    //获取短链接
+                    $loonLink = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php?a=messageApi&c=showMsgInfo&msgId=".$msgId."&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+                    $shortUrl = $weChatClass->getShortLinK($loonLink,$access_token)->short_url;
                     //组装模板消息
                     $template = array(
                         'touser' => $openId,
                         'template_id' => '9nDUG73NbtCSo3Vtx0og8eEJaCXU0PcmGSjZiGhwY-k',
-                        'url' => 'http://115.159.186.166/index.php?a=messageApi&c=showMsgInfo&msgId='.$msgId,
+                        'url' => $shortUrl,
                         'data' => array(
                             'first' => array('value' => urlencode($name).',您好,您有一条通知!','color' => '#173177'),
                             'From' => array('value' => urlencode($groupName),'color' => '#173177'),
@@ -64,7 +68,7 @@ class messageApiController extends Controller
                             'remark' => array('value' => '请务必点击查看详情！','color' => '#173177')
                         ),
                     );
-                    $res = $templateClass->sendTemMsg(urldecode(json_encode($template)),$access_token);
+                    $res = $weChatClass->sendTemMsg($template,$access_token);
                     $this->logSave('sendTemplate',$res);
                 }
                 $this->renderAjax();

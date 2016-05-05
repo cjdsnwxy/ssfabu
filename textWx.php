@@ -6,7 +6,7 @@
  * Time: 22:21
  */
 
-include 'Ext/templateMsgClass.php';
+include 'Ext/weChatClass.php';
 $class = new templateMsgClass('wxa54b997e82462e5a','2b9c188883ebf39f9203eaee4876dda5');
 
 $redis = new Redis();
