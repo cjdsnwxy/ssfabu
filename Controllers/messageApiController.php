@@ -99,7 +99,7 @@ class messageApiController extends Controller
         }
     }
 
-    public function demo(){
+    public function actionDemo(){
         $group = $this->M('Group');
         $list = $group->getMemberListWithGroupName('00000002');
         $memberList = $list['member'];
