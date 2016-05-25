@@ -13,4 +13,12 @@ class indexController extends Controller
     public function actionIndex(){
        $this->display('Index/index');
     }
+
+    //显示消息page
+    public function actionShowMsg(){
+        $msgId = $_GET['state'];
+        $massage = $this->M('Message');
+        $msg = $massage->getMsgInfo($msgId);
+        var_dump($msg);
+    }
 }
