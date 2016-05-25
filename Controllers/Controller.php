@@ -15,8 +15,7 @@ class Controller
         if(isset($_SESSION['openId'])){
             $this->openId = $_SESSION['openId'];
         }else{
-            $code = $_GET['code'];
-            if(empty($code)){
+            if(empty($_GET['code'])){
                 $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?
                 appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php
                 &response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
