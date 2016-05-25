@@ -13,29 +13,28 @@ $c_str = isset($_GET['c']) ? $_GET['c'] : 'index';
 $a_str = isset($_GET['a']) ? $_GET['a'] : 'index';
 if(isset($_GET['state']) && $_GET['state'] != 'STATE'){
     $state = unserialize($_GET['state']);
+    $msg = $state['msgId'];
     include $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
     $con = new indexController();
     $con->actionShowMsg($msgId);
-}else{
-    //拼接控制器名和方法名
-    $c_name = $c_str.'Controller';
-    $a_name = 'action'.ucfirst($a_str);
-    $path = $_SERVER['DOCUMENT_ROOT'].'/Controllers/'.$c_name.'.php';
+}
+//拼接控制器名和方法名
+$c_name = $c_str.'Controller';
+$a_name = 'action'.ucfirst($a_str);
+$path = $_SERVER['DOCUMENT_ROOT'].'/Controllers/'.$c_name.'.php';
 
-    //判断合法性
-    if(@!include $path){
+//判断合法性
+if(@!include $path){
+    defaultIndex();
+}else{
+    $con = new $c_name();
+
+    if(false == method_exists($con,$a_name)){
         defaultIndex();
     }else{
-        $con = new $c_name();
-
-        if(false == method_exists($con,$a_name)){
-            defaultIndex();
-        }else{
-            $con->$a_name();
-        }
+        $con->$a_name();
     }
 }
-
 //默认控制器和方法
 function defaultIndex(){
     include $_SERVER['DOCUMENT_ROOT'].'/Controllers/indexController.php';
