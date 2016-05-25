@@ -430,7 +430,6 @@ function sendMsg() {
   var startTime = $("#startTimeInSendMsgPage").val();
   var address = $("#addressInSendMsgPage").val();
   var intro = $("#introInSendMsgPage").val();
-  $.showLoading();
   $.ajax({
     type: "POST",
     url: "/index.php?c=messageApi&a=sendMsg",
@@ -443,7 +442,6 @@ function sendMsg() {
       intro : intro
     },
     success: function (j) {
-      $.hideLoading();
       if(j.ok == 0){
         $.toast("发送成功");
       }else{

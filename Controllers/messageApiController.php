@@ -29,6 +29,7 @@ class messageApiController extends Controller
             $msg = $this->M('Message');
             $msgId = $msg->createMsg($groupId,$title,$startTime,$address,$intro);
             if($msgId){
+                $this->renderAjax();
                 //根据groupId获得群组信息
                 $group = $this->M('Group');
                 $list = $group->getMemberListWithGroupName($groupId);
@@ -45,11 +46,17 @@ class messageApiController extends Controller
                     $access_token = $weChatClass->getToken();
                     $redis->redisSet('access_token',$access_token,7000);
                 }
+                $state = array(
+                    'a' => 'index',
+                    'c' => 'showMsg',
+                    'msgID' => $msgId
+                );
+                $newState = serialize($state);
+                $loonLink = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php&response_type=code&scope=snsapi_base&state=".$newState."#wechat_redirect";
+                //获取短链接
+                $shortUrl = $weChatClass->getShortLinK($loonLink,$access_token)->short_url;
                 //对每个人发送模板消息
                 foreach ($memberList as $openId => $name){
-                    //获取短链接
-                    $loonLink = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php?c=index&a=showMsg&response_type=code&scope=snsapi_base&state=".$msgId."#wechat_redirect";
-                    $shortUrl = $weChatClass->getShortLinK($loonLink,$access_token)->short_url;
                     //组装模板消息
                     $template = array(
                         'touser' => $openId,
@@ -67,7 +74,7 @@ class messageApiController extends Controller
                     $res = $weChatClass->sendTemMsg($template,$access_token);
                     $this->logSave('sendTemplate',$res);
                 }
-                $this->renderAjax();
+
             }else{
                 $this->renderErr('发送失败');
             }
