@@ -11,29 +11,24 @@ class Controller
 
     function __construct(){
         include $_SERVER['DOCUMENT_ROOT'].'/Base/conf.php';
-        
-
-//        $this->openId = '00000001';
-//        $user = $this->M('User');
-//        $user->createUser($this->openId);
-
-
         session_start();
         if(isset($_SESSION['openId'])){
             $this->openId = $_SESSION['openId'];
         }else{
             $code = $_GET['code'];
             if(empty($code)){
-                $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
+                $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?
+                appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php
+                &response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
                 header("Location:".$url);
                 exit;
             }else{
                 include $_SERVER['DOCUMENT_ROOT'].'/Ext/wxClass.php';
                 $wxClass = new wxClass(APPID,APPSECRET,$code);
                 $this->openId = $wxClass->getOpenId();
-                $_SESSION['openId'] = $this->openId;
                 $user = $this->M('User');
                 $user->createUser($this->openId);
+                $_SESSION['openId'] = $this->openId;
             }
         }
     }
