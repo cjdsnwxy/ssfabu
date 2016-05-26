@@ -22,12 +22,18 @@ class Controller
                 header("Location:".$url);
                 exit;
             }else{
+                $code = $_GET['code'];
                 include $_SERVER['DOCUMENT_ROOT'].'/Ext/wxClass.php';
                 $wxClass = new wxClass(APPID,APPSECRET,$code);
                 $this->openId = $wxClass->getOpenId();
                 $user = $this->M('User');
                 $user->createUser($this->openId);
                 $_SESSION['openId'] = $this->openId;
+                if(isset($_GET['state'])){
+                   var_dump($_GET['state']);die;
+                }else{
+                    echo 'state is empty';die;
+                }
             }
         }
     }
