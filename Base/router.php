@@ -1,4 +1,4 @@
-git<?php
+<?php
 /**
  * Created by PhpStorm.
  * User: king
