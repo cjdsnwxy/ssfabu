@@ -1,6 +1,6 @@
 <?php
 
-ini_set("display_errors", "On");
+ini_set("display_errors", "Off");
 error_reporting(E_ALL | E_STRICT);
 
 //入口文件
