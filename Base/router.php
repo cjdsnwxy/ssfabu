@@ -15,13 +15,13 @@ $getVars = array();
 foreach ($parsed as $argument)
 {
     //用"="分隔字符串，左边为变量，右边为值
-    list($variable , $value) = explode('=' , $argument);
+    @list($variable , $value) = explode('=' , $argument);
     $getVars[$variable] = $value;
 }
 
 //拼接控制器名和方法名
-$getVars['c'] = $getVars['c'] ? $getVars['c'] : 'index';
-$getVars['a'] = $getVars['a'] ? $getVars['a'] : 'index';
+@$getVars['c'] = $getVars['c'] ? $getVars['c'] : 'index';
+@$getVars['a'] = $getVars['a'] ? $getVars['a'] : 'index';
 $c_name = $getVars['c'].'Controller';
 $a_name = 'action'.ucfirst($getVars['a']);
 
