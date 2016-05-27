@@ -26,6 +26,13 @@ class Controller
         }
     }
 
+    //redisClass
+    public static function redis(){
+        $redis = new Redis();
+        $redis->connect(REDIS_HOST,REDIS_PORT);
+        return $redis;
+    }
+
     //logSave函数
     public function logSave($type,$logData){
         $log = new Log();

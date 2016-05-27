@@ -48,10 +48,14 @@ class messageApiController extends Controller
                 $loonLink = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa54b997e82462e5a&redirect_uri=".SITE_ROOT."/index.php&response_type=code&scope=snsapi_base&state=".$msgId."#wechat_redirect";
                 //获取短链接
                 $shortUrl = $templateMessageClass->getShortLinK($loonLink,$access_token)->short_url;
+                $redis = parent::redis();
+                $hash = 'msg'.$msgId;
+
                 //对每个人发送模板消息
                 foreach ($memberList as $openId => $name){
                     //初始化模板消息查阅状态
-
+                    $redis->hSet($hash,$openId,'0');
+                    
                     //组装模板消息
                     $template = array(
                         'touser' => $openId,
