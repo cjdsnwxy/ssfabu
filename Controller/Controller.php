@@ -20,7 +20,7 @@ class Controller
                 $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?
                 appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php
                 &response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
-                header("Location: http://zhidao.baidu.com");
+                header("Location: " . $url);
                 exit;
             }else{
                 $code = $_GET['code'];
