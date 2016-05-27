@@ -1,7 +1,18 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: King
+ * Date: 2016/5/26
+ * Time: 16:02
+ */
+//根目录常量
+define("SERVER_ROOT", dirname(__FILE__));
 
-ini_set("display_errors", "Off");
-error_reporting(E_ALL | E_STRICT);
+//域名常量
+define('SITE_ROOT' , 'http://www.ssfabu.cn');
 
-//入口文件
-require $_SERVER['DOCUMENT_ROOT'].'/Base/router.php';
+//引入配置文件
+require (SERVER_ROOT . '/Conf/' . 'conf.php');
+
+//引入路由文件
+require (SERVER_ROOT . '/Base/' . 'router.php');
