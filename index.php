@@ -9,7 +9,7 @@
 define("SERVER_ROOT", dirname(__FILE__));
 
 //域名常量
-define('SITE_ROOT' , 'http://115.159.186.166');
+define('SITE_ROOT' , 'http://www.ssfabu.cn');
 
 //引入配置文件
 require (SERVER_ROOT . '/Conf/' . 'conf.php');

@@ -16,21 +16,14 @@ class Controller
         if(isset($_SESSION['openId'])){
             $this->openId = $_SESSION['openId'];
         }else{
-            if(empty($_GET['code'])){
-                $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?
-                appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php
-                &response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
-                header("Location: " . $url);
-                exit;
-            }else{
-                $code = $_GET['code'];
-                include_once $_SERVER['DOCUMENT_ROOT'].'/Ext/getOpenIdClass.php';
-                $getOpenIdClass = new getOpenIdClass(APPID,APPSECRET,$code);
-                $this->openId = $getOpenIdClass->getOpenId();
-                $user = new User();
-                $user->createUser($this->openId);
-                $_SESSION['openId'] = $this->openId;
-            }
+//            $code = $_GET['code'];
+//            include_once $_SERVER['DOCUMENT_ROOT'].'/Ext/getOpenIdClass.php';
+//            $getOpenIdClass = new getOpenIdClass(APPID,APPSECRET,$code);
+//            $this->openId = $getOpenIdClass->getOpenId();
+            $this->openId = '111111';
+            $user = new User();
+            $user->createUser($this->openId);
+            $_SESSION['openId'] = $this->openId;
         }
     }
 
