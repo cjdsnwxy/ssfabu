@@ -18,6 +18,7 @@ foreach ($parsed as $argument)
     list($variable , $value) = explode('=' , $argument);
     $getVars[$variable] = $value;
 }
+
 //拼接控制器名和方法名
 $getVars['c'] = $getVars['c'] ? $getVars['c'] : 'index';
 $getVars['a'] = $getVars['a'] ? $getVars['a'] : 'index';
