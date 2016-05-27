@@ -20,8 +20,10 @@ class Controller
                 $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?
                 appid=wxa54b997e82462e5a&redirect_uri=http://115.159.186.166/index.php
                 &response_type=code&scope=snsapi_base&state=STATE#wechat_redirect';
-                header("Location:".$url);
-                exit;
+                echo "< script language='javascript' type='text/javascript'>";
+                echo "window.location.href='$url'";
+                echo "< /script>";
+                die;
             }else{
                 $code = $_GET['code'];
                 include_once $_SERVER['DOCUMENT_ROOT'].'/Ext/getOpenIdClass.php';
