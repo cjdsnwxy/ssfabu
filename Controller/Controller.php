@@ -16,14 +16,13 @@ class Controller
         if(isset($_SESSION['openId'])){
             $this->openId = $_SESSION['openId'];
         }else{
-//            if(empty($_GET['code'])){
-//                die;
-//            }
-//            $code = $_GET['code'];
-//            include_once $_SERVER['DOCUMENT_ROOT'].'/Ext/getOpenIdClass.php';
-//            $getOpenIdClass = new getOpenIdClass(APPID,APPSECRET,$code);
-//            $this->openId = $getOpenIdClass->getOpenId();
-            $this->openId = '111111';
+            if(empty($_GET['code'])){
+                die;
+            }
+            $code = $_GET['code'];
+            include_once $_SERVER['DOCUMENT_ROOT'].'/Ext/getOpenIdClass.php';
+            $getOpenIdClass = new getOpenIdClass(APPID,APPSECRET,$code);
+            $this->openId = $getOpenIdClass->getOpenId();
             $user = new User();
             $user->createUser($this->openId);
             $_SESSION['openId'] = $this->openId;
