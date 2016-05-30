@@ -27,7 +27,7 @@ class indexController extends Controller
                 $this->display('Page/message',$megInfo);
             }
         }else{
-
+        
         }
     }
 }

@@ -44,9 +44,9 @@ class messageApiController extends Controller
                     $access_token = $templateMessageClass->getToken();
                     $redis->set('access_token',$access_token,7000);
                 }
-                $loonLink = "https://open.weixin.qq.com/connect/oauth2/authorize?
-                            appid=".APPID."&redirect_uri=".SITE_ROOT."/index.php
-                            &response_type=code&scope=snsapi_base&state=".$msgId.
+                $loonLink = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".APPID.
+                            "&redirect_uri=".SITE_ROOT.
+                            "/index.php&response_type=code&scope=snsapi_base&state=".$msgId.
                             "#wechat_redirect";
                 //获取短链接
                 $shortUrl = $templateMessageClass->getShortLinK($loonLink,$access_token)->short_url;
