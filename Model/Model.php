@@ -11,7 +11,7 @@ class Model
 
     public function __construct()
     {
-        //mongodb = new MongoClient("mongodb://".MONGO_USERNAME.":".MONGO_PWD."@".MONGO_HOST.":".MONGO_PORT);
+        //$mongodb = new MongoClient("mongodb://".MONGO_USERNAME.":".MONGO_PWD."@".MONGO_HOST.":".MONGO_PORT);
         $mongodb = new MongoClient();
         $mongo = $mongodb->selectDB(MONGO_DBNAME);
         $Class = lcfirst(get_class($this));

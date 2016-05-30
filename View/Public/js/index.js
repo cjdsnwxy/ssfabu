@@ -243,7 +243,7 @@ function showMsgInfoPage(msgId) {
         $("#blackBtnInMsgInfoPage").removeAttr("onclick");
         $("#blackBtnInMsgInfoPage").attr("onclick","blackHistoryMsgPage();");
         $("#showMsgStateBtnInMsgInfoPage").removeAttr("onclick");
-        $("#showMsgStateBtnInMsgInfoPage").attr("onclick","showMsgStatePage("+ msgId +");");
+        $("#showMsgStateBtnInMsgInfoPage").attr("onclick","showMsgStatePage('"+ msgId +"');");
         $(".weui_msg").hide();
         $("#msgInfoPage").show();
       }
@@ -262,7 +262,29 @@ function showMsgStatePage(msgId) {
     success: function (j) {
       if(j.ok == 0){
         $.hideLoading();
-
+        var msgStateList = "";
+        $.each(j.obj,function(n,value) {
+          var list = "";
+          if(value.state === "1"){
+            list += "<a class='weui_cell'>" +
+                "<div class='weui_cell_bd'>" +
+                "<label for class='weui_label'>"+ value.name +"</label>" +
+                "</div>" +
+                "<div class='weui_cell_ft'>" +
+                "<i class='weui_icon_success_no_circle'></i>"+
+                "</div>" +
+                "</a>";
+          } else {
+            list += "<a class='weui_cell'>" +
+                "<div class='weui_cell_bd'>" +
+                "<label for class='weui_label'>"+ value.name +"</label>" +
+                "</div>" +
+                "</a>";
+          }
+          msgStateList+=list;
+        });
+        $("#MemberStateList").children().remove();
+        $("#MemberStateList").append(msgStateList);
         $(".weui_msg").hide();
         $("#msgStatePage").show();
       }

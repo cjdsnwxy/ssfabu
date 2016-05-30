@@ -54,6 +54,7 @@ else
     //不能在controllers找到此文件
     die('page does not exist!');
 }
+
 function __autoload($className){
     //$file = SERVER_ROOT . '/Model/' .$modelName. '.php';
     if($className == 'Controller'){

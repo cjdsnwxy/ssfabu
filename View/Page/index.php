@@ -346,7 +346,7 @@
   <div class="weui_text_area">
   </div>
   <div class="weui_opr_area">
-    <div id="MemberStateList" class="weui_cells weui_cells_access">
+    <div id="MemberStateList" class="weui_cells weui_cells_form">
 
     </div>
   </div>
